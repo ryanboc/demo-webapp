@@ -4,14 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
-    <title>{{ config('portfolio.name', 'Portfolio') }}</title>
-    <meta name="description" content="{{ config('portfolio.name') }} — selected work, skills, and contact." />
+    <title>{{ config('portfolio.name', 'Portfolio') }} — Backend & Systems</title>
+    <meta name="description" content="Laravel Developer and Linux Systems Administrator available for freelance. Expert in backend architecture, server management, and DNS configuration." />
 
     <style>
       :root {
         /* Light Mode (Default) */
         --bg: #ffffff;
-        --bg-alt: #f9fafb; /* Very light gray for contrast */
+        --bg-alt: #f9fafb; /* Very light gray */
         --bg-card: #ffffff;
         --fg: #111827;     /* Gray 900 */
         --muted: #4b5563;  /* Gray 600 */
@@ -20,10 +20,11 @@
         --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
         --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
 
-        --brand: #4f46e5; /* Professional Indigo */
-        --brand-hover: #4338ca;
+        /* Changed Brand Color to a "Server/Tech" Blue */
+        --brand: #2563eb; 
+        --brand-hover: #1d4ed8;
         
-        --radius: 8px; /* Tighter, more professional radius */
+        --radius: 8px;
         --container: 1024px;
 
         --font-main: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -42,9 +43,8 @@
         --space-5: 32px;
         --space-6: 48px;
         --space-7: 64px;
-        --space-8: 96px;
 
-        --focus-ring: 0 0 0 3px rgba(79, 70, 229, 0.3);
+        --focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.3);
       }
 
       [data-theme="dark"] {
@@ -56,8 +56,8 @@
         --muted-2: #94a3b8;
         --border: #334155;
         --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
-        --brand: #6366f1;
-        --brand-hover: #818cf8;
+        --brand: #3b82f6;
+        --brand-hover: #60a5fa;
       }
 
       * { box-sizing: border-box; }
@@ -93,6 +93,7 @@
       h1, h2, h3, h4 { line-height: 1.1; margin: 0; font-weight: 700; color: var(--fg); }
       p { margin: 0 0 var(--space-3); color: var(--muted); }
       strong { font-weight: 600; color: var(--fg); }
+      code { font-family: ui-monospace, monospace; font-size: 0.9em; background: var(--bg-alt); padding: 2px 4px; border-radius: 4px; border: 1px solid var(--border); }
 
       /* === Header === */
       header {
@@ -240,18 +241,27 @@
       .project-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); border-color: var(--brand); }
       
       .project-content { padding: var(--space-4); flex: 1; display: flex; flex-direction: column; }
+      
+      /* Changed thumb to be code/terminal aesthetic */
       .project-thumb {
-        height: 160px;
+        height: 140px;
         background: var(--bg-alt);
         border-bottom: 1px solid var(--border);
         position: relative;
+        font-family: monospace;
+        color: var(--muted-2);
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        opacity: 0.3;
       }
-      .project-thumb::after { content: "Image Placeholder"; position: absolute; inset:0; display: grid; place-items:center; color: var(--muted-2); font-size: var(--step--1); }
 
       .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding: 0; list-style: none; }
       .tag {
         font-size: 0.75rem; padding: 4px 8px; border-radius: 4px;
         background: var(--bg-alt); color: var(--muted); border: 1px solid var(--border);
+        font-family: monospace;
       }
 
       /* === Experience / About === */
@@ -288,7 +298,7 @@
       input:focus, textarea:focus {
         outline: none;
         border-color: var(--brand);
-        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
       }
       textarea { resize: vertical; min-height: 120px; }
 
@@ -306,7 +316,7 @@
       /* === Responsive === */
       @media (max-width: 900px) {
         .hero-grid, .grid-3, .grid-2, .contact-grid { grid-template-columns: 1fr; }
-        .nav-links { display: none; } /* Simplified mobile menu hiding for this snippet */
+        .nav-links { display: none; }
         .timeline-item { grid-template-columns: 1fr; gap: 4px; }
       }
 
@@ -325,13 +335,13 @@
     <header>
       <div class="container nav">
         <a class="brand" href="#top">
-          {{ config('portfolio.name', 'Ryan') }}
+          <span style="color:var(--brand);"></span>{{ config('portfolio.name', 'name') }}
         </a>
 
         <nav class="nav-links">
-          <a href="#projects">Work</a>
-          <a href="#about">Process</a>
-          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#services">Services</a>
+          <a href="#stack">Tech Stack</a>
           <a href="#contact">Contact</a>
         </nav>
 
@@ -349,20 +359,20 @@
         <div class="container hero-grid">
           <div>
             <div class="pill" aria-label="Status">
-              <span aria-hidden="true">●</span> Available for new projects
+              <span aria-hidden="true">●</span> Accepting freelance contracts
             </div>
-            <h1>{{ config('portfolio.headline', 'Building digital products with purpose.') }}</h1>
+            <h1>{{ config('portfolio.headline', 'Robust Backend Systems & Server Infrastructure.') }}</h1>
             <p class="lead">
-              I’m <strong>{{ config('portfolio.name') }}</strong>, a <strong>{{ config('portfolio.subheadline', 'Senior Frontend Engineer') }}</strong> specializing in scalable web applications and design systems.
+              I am <strong>{{ config('portfolio.name') }}</strong>, a <strong>{{ config('portfolio.subheadline', 'Laravel Developer & Systems Administrator') }}</strong>. I build secure APIs, manage Linux servers, and optimize backend performance.
             </p>
             <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-              <a class="btn btn-primary" href="#projects">View Selected Work</a>
+              <a class="btn btn-primary" href="#services">My Services</a>
               <a class="btn" href="{{ config('portfolio.github') }}" target="_blank">GitHub</a>
               <button class="btn" id="copyEmailBtn">Copy Email</button>
             </div>
             
             <div style="margin-top: var(--space-4); color: var(--muted-2); font-size: var(--step--1);">
-              📍 {{ config('portfolio.location', 'Remote') }} &nbsp;•&nbsp; TypeScript, React, Node &nbsp;•&nbsp; Product Design
+              📍 {{ config('portfolio.location', 'Remote') }} &nbsp;•&nbsp; Laravel &nbsp;•&nbsp; Linux &nbsp;•&nbsp; Networking
             </div>
           </div>
 
@@ -371,16 +381,16 @@
                @if(config('portfolio.photo'))
                 <img src="{{ config('portfolio.photo') }}" alt="{{ config('portfolio.name') }}">
               @else
-                <div style="width:100%; height:100%; display:grid; place-items:center; background:#e5e7eb; color:#6b7280; font-weight:bold;">IMG</div>
+                <div style="width:100%; height:100%; display:grid; place-items:center; background:#f1f5f9; color:#64748b; font-weight:bold;">IMG</div>
               @endif
             </div>
-            <h3>Engineering & Design</h3>
-            <p style="font-size: 0.9em; margin-top:8px;">Bridging the gap between complex backends and beautiful user interfaces.</p>
+            <h3>Backend & Ops</h3>
+            <p style="font-size: 0.9em; margin-top:8px;">Focusing on server stability, security, and clean architecture.</p>
             
             <div class="stats-grid">
-              <div class="stat-item"><strong>8+</strong><span>Years</span></div>
-              <div class="stat-item"><strong>40+</strong><span>Projects</span></div>
-              <div class="stat-item"><strong>100%</strong><span>Commitment</span></div>
+              <div class="stat-item"><strong>99.9%</strong><span>Uptime</span></div>
+              <div class="stat-item"><strong>API</strong><span>First</span></div>
+              <div class="stat-item"><strong>Root</strong><span>Access</span></div>
             </div>
           </aside>
         </div>
@@ -390,42 +400,42 @@
         <div class="container">
           <div class="section-head">
             <div>
-              <h2>Selected Projects</h2>
-              <p>Case studies in performance, accessibility, and scale.</p>
+              <h2>Recent Projects</h2>
+              <p>Backend logic, server automation, and system administration.</p>
             </div>
-            <a class="btn btn-ghost" href="{{ config('portfolio.github') }}">View all on GitHub →</a>
+            <a class="btn btn-ghost" href="{{ config('portfolio.github') }}">View Code on GitHub →</a>
           </div>
 
           <div class="grid-3">
             <article class="card project-card">
-              <div class="project-thumb"></div>
+              <div class="project-thumb">PHP</div>
               <div class="project-content">
-                <h3>Analytics Dashboard</h3>
-                <p>A real-time data visualization platform handling high-volume event streams.</p>
+                <h3>SaaS Backend API</h3>
+                <p>Architected a multi-tenant API using Laravel. Handled authentication, subscription billing, and job queues.</p>
                 <ul class="tags">
-                  <li class="tag">React</li><li class="tag">D3.js</li><li class="tag">TypeScript</li>
+                  <li class="tag">Laravel 10</li><li class="tag">Redis</li><li class="tag">MySQL</li>
                 </ul>
               </div>
             </article>
 
             <article class="card project-card">
-              <div class="project-thumb"></div>
+              <div class="project-thumb">SSH</div>
               <div class="project-content">
-                <h3>E-Commerce Core</h3>
-                <p>Headless Shopify implementation with Next.js achieving a 99 Lighthouse score.</p>
+                <h3>Home Lab & DNS Cluster</h3>
+                <p>Custom BIND9 setup managed via DuckDNS. Self-hosted services behind Nginx reverse proxies with automated SSL.</p>
                 <ul class="tags">
-                  <li class="tag">Next.js</li><li class="tag">GraphQL</li><li class="tag">Stripe</li>
+                  <li class="tag">Linux</li><li class="tag">BIND9</li><li class="tag">DuckDNS</li>
                 </ul>
               </div>
             </article>
 
             <article class="card project-card">
-              <div class="project-thumb"></div>
+              <div class="project-thumb">./sh</div>
               <div class="project-content">
-                <h3>Design System UI</h3>
-                <p>A comprehensive component library used across 5 different internal products.</p>
+                <h3>Server Automation Scripts</h3>
+                <p>Bash and Python scripts to automate server provisioning, backups, and log rotation for client VPS instances.</p>
                 <ul class="tags">
-                  <li class="tag">Storybook</li><li class="tag">A11y</li><li class="tag">Tokens</li>
+                  <li class="tag">Bash</li><li class="tag">Cron</li><li class="tag">Python</li>
                 </ul>
               </div>
             </article>
@@ -433,61 +443,45 @@
         </div>
       </section>
 
-      <section id="about" style="background: var(--bg-alt);">
+      <section id="services" style="background: var(--bg-alt);">
         <div class="container">
           <div class="section-head">
-            <h2>How I Work</h2>
+            <h2>What I Offer</h2>
           </div>
           <div class="grid-2">
             <div class="card kpi-card">
-              <h3>Technical Strategy</h3>
-              <p>I don't just write code; I architect solutions that are maintainable and scalable.</p>
+              <h3>Laravel Development</h3>
+              <p>I build custom software solutions that are secure and scalable.</p>
               <ul>
-                <li>Component-Driven Development</li>
-                <li>Automated Testing (Unit & E2E)</li>
-                <li>Performance Budgeting</li>
+                <li>API Development (REST/GraphQL)</li>
+                <li>Database Design & Optimization</li>
+                <li>Legacy Code Refactoring</li>
+                <li>Payment Gateway Integration</li>
               </ul>
             </div>
             <div class="card kpi-card">
-              <h3>User Experience</h3>
-              <p>Performance is a feature. Accessibility is a requirement, not an afterthought.</p>
+              <h3>Linux & Server Management</h3>
+              <p>I handle the infrastructure so you can focus on your business.</p>
               <ul>
-                <li>Semantic HTML & WAI-ARIA</li>
-                <li>Core Web Vitals Optimization</li>
-                <li>Responsive Design Patterns</li>
+                <li>VPS Setup (Ubuntu/Debian/CentOS)</li>
+                <li>DNS Configuration (BIND9, DuckDNS)</li>
+                <li>Web Server Tuning (Nginx/Apache)</li>
+                <li>Security Hardening & Firewalls</li>
               </ul>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="experience">
+      <section id="stack">
         <div class="container">
           <div class="section-head">
-            <h2>Experience</h2>
+            <h2>Technical Stack</h2>
           </div>
-          <div class="card timeline">
-            <div class="timeline-item">
-              <div class="timeline-date">2023 — Present</div>
-              <div>
-                <h3>Senior Frontend Engineer</h3>
-                <p>Leading the frontend platform team, establishing coding standards, and migrating legacy codebases to modern React stacks.</p>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-date">2020 — 2023</div>
-              <div>
-                <h3>Full Stack Developer</h3>
-                <p>Built and maintained multiple client projects using Laravel and Vue.js. Managed deployment pipelines and server infrastructure.</p>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-date">2018 — 2020</div>
-              <div>
-                <h3>UI/UX Designer & Dev</h3>
-                <p>Bridged design and engineering. Created high-fidelity prototypes and implemented them in HTML/CSS/JS.</p>
-              </div>
-            </div>
+          <div class="card" style="padding: var(--space-4);">
+             <p style="margin-bottom: 12px;"><strong>Languages & Frameworks:</strong> PHP (Laravel), Python, Bash, SQL.</p>
+             <p style="margin-bottom: 12px;"><strong>Server & OS:</strong> Ubuntu Server, Debian, CentOS, Arch Linux.</p>
+             <p style="margin-bottom: 0;"><strong>Tools:</strong> Git, Docker, Composer, Nginx, BIND9, UFW, Fail2Ban.</p>
           </div>
         </div>
       </section>
@@ -495,13 +489,13 @@
       <section id="contact">
         <div class="container">
           <div class="section-head">
-            <h2>Get in Touch</h2>
+            <h2>Hire Me</h2>
           </div>
           <div class="card" style="padding: var(--space-6);">
             <div class="contact-grid">
               <div>
-                <h3>Let's collaborate</h3>
-                <p>I’m currently open to new opportunities. Whether you have a question or just want to say hi, I’ll try my best to get back to you!</p>
+                <h3>Available for Freelance</h3>
+                <p>Need a Laravel expert or someone to fix your server config? Send me the details and I'll get back to you with a quote.</p>
                 
                 <div style="margin-top: 24px;">
                    <a class="btn" href="mailto:{{ config('portfolio.email') }}" style="width:100%; justify-content:center;">
@@ -516,18 +510,18 @@
 
               <form id="contactForm">
                 <div class="form-group">
-                  <label for="name">Name</label>
-                  <input type="text" id="name" name="name" placeholder="Jane Doe" required>
+                  <label for="name">Name / Company</label>
+                  <input type="text" id="name" name="name" placeholder="John from Agency X" required>
                 </div>
                 <div class="form-group">
                   <label for="email">Email</label>
-                  <input type="email" id="email" name="email" placeholder="jane@example.com" required>
+                  <input type="email" id="email" name="email" placeholder="john@example.com" required>
                 </div>
                 <div class="form-group">
-                  <label for="message">Message</label>
-                  <textarea id="message" name="message" placeholder="How can I help you?" required></textarea>
+                  <label for="message">Project Details</label>
+                  <textarea id="message" name="message" placeholder="I need a Laravel backend for..." required></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Send Message</button>
+                <button type="submit" class="btn btn-primary">Request Quote</button>
               </form>
             </div>
           </div>
@@ -537,7 +531,7 @@
 
     <footer>
       <div class="container footer-flex">
-        <div>&copy; <span id="year"></span> {{ config('portfolio.name') }}. All rights reserved.</div>
+        <div>&copy; <span id="year"></span> {{ config('portfolio.name') }}. Built with Laravel.</div>
         <div style="display:flex; gap:20px;">
             <a href="#top">Back to Top</a>
             <a href="mailto:{{ config('portfolio.email') }}">Email</a>
@@ -567,7 +561,7 @@
         if(saved) {
            setTheme(saved);
         } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-           setTheme('dark'); // Respect OS, but default HTML is light
+           setTheme('dark');
         }
 
         // Year
@@ -594,7 +588,7 @@
         form.addEventListener('submit', (e) => {
           e.preventDefault();
           const fd = new FormData(form);
-          const subject = `New message from ${fd.get('name')}`;
+          const subject = `Freelance Inquiry: ${fd.get('name')}`;
           const body = `${fd.get('message')}\n\nFrom: ${fd.get('name')} (${fd.get('email')})`;
           window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         });
