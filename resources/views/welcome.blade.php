@@ -455,7 +455,6 @@
               <ul>
                 <li>API Development (REST/GraphQL)</li>
                 <li>Database Design & Optimization</li>
-                <li>Legacy Code Refactoring</li>
                 <li>Payment Gateway Integration</li>
               </ul>
             </div>
@@ -480,7 +479,7 @@
           </div>
           <div class="card" style="padding: var(--space-4);">
              <p style="margin-bottom: 12px;"><strong>Languages & Frameworks:</strong> PHP (Laravel), Python, Bash, SQL.</p>
-             <p style="margin-bottom: 12px;"><strong>Server & OS:</strong> Ubuntu Server, Debian, CentOS, Arch Linux.</p>
+             <p style="margin-bottom: 12px;"><strong>Server & OS:</strong> Ubuntu Server, Debian, CentOS.</p>
              <p style="margin-bottom: 0;"><strong>Tools:</strong> Git, Docker, Composer, Nginx, BIND9, UFW, Fail2Ban.</p>
           </div>
         </div>
