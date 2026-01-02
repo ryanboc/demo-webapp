@@ -5,46 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
     <title>{{ config('portfolio.name', 'Portfolio') }} — Backend & Systems</title>
-    <meta name="description" content="Laravel Developer and Linux Systems Administrator available for freelance. Expert in backend architecture, server management, and DNS configuration." />
+    <meta name="description" content="Laravel Developer and Linux Systems Administrator. Backend architecture and server automation." />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
       :root {
-        /* Light Mode (Default) */
+        /* Color Palette (Slate / Server Blue) */
         --bg: #ffffff;
-        --bg-alt: #f9fafb; /* Very light gray */
+        --bg-alt: #f8fafc;
         --bg-card: #ffffff;
-        --fg: #111827;     /* Gray 900 */
-        --muted: #4b5563;  /* Gray 600 */
-        --muted-2: #6b7280; /* Gray 500 */
-        --border: #e5e7eb; /* Gray 200 */
-        --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
-
-        /* Changed Brand Color to a "Server/Tech" Blue */
-        --brand: #2563eb; 
+        --fg: #0f172a;      /* Dark Slate */
+        --muted: #475569;   /* Medium Slate */
+        --muted-2: #94a3b8; /* Light Slate */
+        --border: #e2e8f0;
+        
+        --brand: #2563eb;   /* Royal Blue */
         --brand-hover: #1d4ed8;
+        --accent: #38bdf8;  /* Cyan for subtle details */
+
+        --radius: 12px;
+        --container: 1100px;
+
+        --font-main: 'Inter', system-ui, sans-serif;
+        --font-mono: 'JetBrains Mono', monospace;
         
-        --radius: 8px;
-        --container: 1024px;
+        --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+        --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+        --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
 
-        --font-main: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
-        
-        --step--1: 0.875rem;
-        --step-0: 1rem;
-        --step-1: 1.125rem;
-        --step-2: 1.5rem;
-        --step-3: 2.25rem;
-        --step-4: 3rem;
-
-        --space-1: 8px;
-        --space-2: 12px;
-        --space-3: 16px;
-        --space-4: 24px;
-        --space-5: 32px;
-        --space-6: 48px;
-        --space-7: 64px;
-
-        --focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.3);
+        --space-xs: 8px;
+        --space-sm: 16px;
+        --space-md: 32px;
+        --space-lg: 64px;
+        --space-xl: 96px;
       }
 
       [data-theme="dark"] {
@@ -53,279 +51,200 @@
         --bg-card: #1e293b;
         --fg: #f8fafc;
         --muted: #cbd5e1;
-        --muted-2: #94a3b8;
+        --muted-2: #64748b;
         --border: #334155;
-        --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
         --brand: #3b82f6;
         --brand-hover: #60a5fa;
       }
 
-      * { box-sizing: border-box; }
+      /* Global Reset */
+      * { box-sizing: border-box; margin: 0; padding: 0; }
       html { scroll-behavior: smooth; }
 
       body {
-        margin: 0;
         font-family: var(--font-main);
-        font-size: var(--step-0);
-        line-height: 1.6;
-        color: var(--fg);
         background: var(--bg);
-        transition: background-color 0.3s ease, color 0.3s ease;
+        color: var(--fg);
+        line-height: 1.6;
+        transition: background 0.3s, color 0.3s;
       }
 
-      a { color: inherit; text-decoration: none; transition: color 0.2s; }
-      a:focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: 2px; }
-      
-      img { max-width: 100%; display: block; }
-      button { font-family: inherit; }
+      a { text-decoration: none; color: inherit; transition: color 0.2s; }
+      ul { list-style: none; }
 
-      .sr-only {
-        position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-        overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
-      }
-
-      .container { 
-        width: min(var(--container), calc(100% - 40px)); 
-        margin: 0 auto; 
+      .container {
+        width: min(var(--container), calc(100% - 40px));
+        margin: 0 auto;
       }
 
       /* === Typography === */
-      h1, h2, h3, h4 { line-height: 1.1; margin: 0; font-weight: 700; color: var(--fg); }
-      p { margin: 0 0 var(--space-3); color: var(--muted); }
-      strong { font-weight: 600; color: var(--fg); }
-      code { font-family: ui-monospace, monospace; font-size: 0.9em; background: var(--bg-alt); padding: 2px 4px; border-radius: 4px; border: 1px solid var(--border); }
-
-      /* === Header === */
-      header {
-        position: sticky;
-        top: 0;
-        z-index: 50;
-        background: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(8px);
-        border-bottom: 1px solid var(--border);
-        transition: background 0.3s, border-color 0.3s;
-      }
-      [data-theme="dark"] header { background: rgba(15, 23, 42, 0.9); }
-
-      .nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 16px 0;
-      }
-
-      .brand {
-        font-weight: 700;
-        font-size: var(--step-1);
-        letter-spacing: -0.02em;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
-
-      .nav-links { display: flex; gap: 24px; align-items: center; }
-      .nav-links a {
-        font-size: var(--step--1);
-        font-weight: 500;
-        color: var(--muted);
-      }
-      .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--brand); }
-
-      .nav-actions { display: flex; gap: 12px; align-items: center; }
+      h1, h2, h3 { line-height: 1.1; font-weight: 800; letter-spacing: -0.02em; color: var(--fg); }
+      h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+      h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); margin-bottom: 10px; }
+      p { color: var(--muted); margin-bottom: 20px; font-size: 1.05rem; }
+      
+      .text-mono { font-family: var(--font-mono); }
+      .text-brand { color: var(--brand); }
 
       /* === Buttons === */
       .btn {
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        padding: 10px 18px;
+        padding: 12px 24px;
         border-radius: var(--radius);
-        font-size: var(--step--1);
         font-weight: 600;
         cursor: pointer;
-        transition: all 0.2s ease;
-        border: 1px solid var(--border);
-        background: var(--bg-card);
-        color: var(--fg);
-        text-decoration: none;
+        transition: all 0.2s;
+        border: 1px solid transparent;
+        font-size: 0.95rem;
       }
-      .btn:hover { border-color: var(--muted-2); background: var(--bg-alt); }
+      .btn-primary { background: var(--brand); color: white; box-shadow: var(--shadow-sm); }
+      .btn-primary:hover { background: var(--brand-hover); transform: translateY(-1px); }
       
-      .btn-primary {
-        background: var(--brand);
-        color: #fff;
-        border-color: transparent;
-      }
-      .btn-primary:hover { background: var(--brand-hover); border-color: transparent; color: #fff; }
+      .btn-outline { border-color: var(--border); background: transparent; color: var(--fg); }
+      .btn-outline:hover { border-color: var(--muted); background: var(--bg-alt); }
       
-      .btn-ghost { border-color: transparent; background: transparent; padding: 8px; }
-      .btn-ghost:hover { background: var(--bg-alt); }
+      .btn-sm { padding: 8px 16px; font-size: 0.85rem; }
 
-      /* === Hero === */
-      .hero { padding: var(--space-7) 0 var(--space-6); }
-      .hero-grid {
-        display: grid;
-        grid-template-columns: 1.5fr 1fr;
-        gap: var(--space-6);
-        align-items: center;
+      /* === Header === */
+      header {
+        position: sticky; top: 0; z-index: 100;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
       }
+      [data-theme="dark"] header { background: rgba(15, 23, 42, 0.85); }
       
-      .hero h1 {
-        font-size: var(--step-4);
-        margin-bottom: var(--space-3);
-        letter-spacing: -0.03em;
-      }
-      .hero p.lead { font-size: var(--step-1); max-width: 50ch; margin-bottom: var(--space-5); line-height: 1.5; }
+      .nav-inner { display: flex; justify-content: space-between; align-items: center; height: 70px; }
+      .logo { font-weight: 800; font-size: 1.25rem; display: flex; align-items: center; gap: 8px; }
+      
+      .nav-links { display: flex; gap: 30px; }
+      .nav-links a { font-weight: 500; font-size: 0.95rem; color: var(--muted); }
+      .nav-links a:hover { color: var(--brand); }
+      
+      @media (max-width: 768px) { .nav-links { display: none; } }
 
-      .pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 4px 12px;
-        border-radius: 999px;
-        background: var(--bg-alt);
-        color: var(--muted);
-        font-size: var(--step--1);
-        font-weight: 500;
-        margin-bottom: var(--space-3);
-        border: 1px solid var(--border);
+      /* === Hero Section (Dot Pattern) === */
+      .hero {
+        padding: var(--space-xl) 0;
+        background-image: radial-gradient(var(--muted-2) 1px, transparent 1px);
+        background-size: 30px 30px; /* Dot grid */
+        background-position: 0 0;
+        opacity: 0.9;
+        border-bottom: 1px solid var(--border);
       }
-      .pill span[aria-hidden="true"] { color: #22c55e; font-size: 8px; } /* Green dot */
 
+      .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: var(--space-lg); align-items: center; }
+      
+      .status-pill {
+        display: inline-flex; align-items: center; gap: 8px;
+        padding: 6px 12px; border-radius: 50px;
+        background: var(--bg-card); border: 1px solid var(--border);
+        font-size: 0.85rem; font-weight: 600; color: var(--muted);
+        margin-bottom: 24px; box-shadow: var(--shadow-sm);
+      }
+      .dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2); }
+
+      /* Profile Card */
       .profile-card {
-        background: var(--bg-card);
-        padding: var(--space-5);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        box-shadow: var(--shadow-lg);
+        background: var(--bg-card); border: 1px solid var(--border);
+        padding: 30px; border-radius: var(--radius);
+        box-shadow: var(--shadow-lg); text-align: center;
       }
       .avatar {
-        width: 80px; height: 80px;
-        border-radius: 999px;
-        background: var(--bg-alt);
-        overflow: hidden;
-        margin-bottom: var(--space-3);
-        border: 1px solid var(--border);
+        width: 100px; height: 100px; border-radius: 50%;
+        margin: 0 auto 20px; overflow: hidden;
+        border: 4px solid var(--bg-alt);
       }
-      .avatar img { width: 100%; height: 100%; object-fit: cover; }
-
-      .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 12px;
-        margin-top: var(--space-4);
-        padding-top: var(--space-4);
+      .stats-row {
+        display: flex; justify-content: space-around;
+        margin-top: 20px; padding-top: 20px;
         border-top: 1px solid var(--border);
       }
-      .stat-item strong { display: block; font-size: var(--step-0); }
-      .stat-item span { font-size: 0.75rem; color: var(--muted-2); text-transform: uppercase; letter-spacing: 0.05em; }
+      .stat h4 { font-size: 1.2rem; margin-bottom: 0; color: var(--fg); }
+      .stat span { font-size: 0.75rem; text-transform: uppercase; color: var(--muted-2); letter-spacing: 1px; font-weight: 600; }
 
-      /* === Sections & Cards === */
-      section { padding: var(--space-6) 0; }
+      /* === Projects (Grid) === */
+      .section { padding: var(--space-lg) 0; }
       
-      .section-head { margin-bottom: var(--space-5); display: flex; justify-content: space-between; align-items: flex-end; }
-      .section-head h2 { font-size: var(--step-3); margin-bottom: 8px; }
-
+      .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; }
+      
+      .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+      
       .card {
-        background: var(--bg-card);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        overflow: hidden;
+        background: var(--bg-card); border: 1px solid var(--border);
+        border-radius: var(--radius); overflow: hidden;
         transition: transform 0.2s, box-shadow 0.2s;
+        height: 100%; display: flex; flex-direction: column;
       }
+      .card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--brand); }
 
-      /* === Projects === */
-      .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
-      
-      .project-card { display: flex; flex-direction: column; height: 100%; }
-      .project-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); border-color: var(--brand); }
-      
-      .project-content { padding: var(--space-4); flex: 1; display: flex; flex-direction: column; }
-      
-      /* Changed thumb to be code/terminal aesthetic */
-      .project-thumb {
-        height: 140px;
-        background: var(--bg-alt);
-        border-bottom: 1px solid var(--border);
-        position: relative;
-        font-family: monospace;
-        color: var(--muted-2);
-        display:flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 3rem;
-        opacity: 0.3;
+      /* Terminal Thumbnails */
+      .terminal-thumb {
+        height: 160px; background: #1e293b; /* Dark bg always */
+        display: flex; align-items: center; justify-content: center;
+        flex-direction: column; border-bottom: 1px solid var(--border);
+        font-family: var(--font-mono); color: #94a3b8;
       }
+      .terminal-thumb i { font-size: 3rem; margin-bottom: 10px; color: #e2e8f0; }
+      .terminal-thumb span { font-size: 0.9rem; background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 4px; }
 
-      .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding: 0; list-style: none; }
+      .card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+      .card-body h3 { font-size: 1.25rem; margin-bottom: 12px; }
+      
+      .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
       .tag {
-        font-size: 0.75rem; padding: 4px 8px; border-radius: 4px;
-        background: var(--bg-alt); color: var(--muted); border: 1px solid var(--border);
-        font-family: monospace;
+        font-size: 0.75rem; padding: 4px 10px; border-radius: 6px;
+        background: var(--bg-alt); border: 1px solid var(--border);
+        color: var(--muted); font-family: var(--font-mono); font-weight: 600;
       }
 
-      /* === Experience / About === */
-      .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
-      .kpi-card { padding: var(--space-4); }
-      .kpi-card ul { padding-left: 20px; color: var(--muted); }
-      .kpi-card li { margin-bottom: 8px; }
+      /* === Services (Split) === */
+      .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+      .service-item ul { margin-top: 16px; }
+      .service-item li { margin-bottom: 10px; display: flex; align-items: center; gap: 10px; color: var(--muted); }
+      .service-item li i { color: var(--brand); font-size: 0.8rem; }
 
-      .timeline { padding: var(--space-4); }
-      .timeline-item {
-        display: grid;
-        grid-template-columns: 120px 1fr;
-        gap: var(--space-4);
-        padding: var(--space-3) 0;
-        border-bottom: 1px solid var(--border);
+      /* === Tech Stack (Pills) === */
+      .stack-container { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+      .stack-pill {
+        display: flex; align-items: center; gap: 8px;
+        padding: 8px 16px; background: var(--bg-card);
+        border: 1px solid var(--border); border-radius: 8px;
+        font-weight: 500; color: var(--fg);
       }
-      .timeline-item:last-child { border-bottom: none; }
-      .timeline-date { color: var(--muted-2); font-size: var(--step--1); font-variant-numeric: tabular-nums; }
+      .stack-pill i { color: var(--muted); }
 
-      /* === Contact === */
-      .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: var(--space-6); align-items: start; }
-      .form-group { margin-bottom: 16px; }
-      label { display: block; font-size: var(--step--1); font-weight: 600; margin-bottom: 6px; color: var(--fg); }
+      /* === Contact Form === */
+      .contact-box {
+        background: var(--bg-card); border: 1px solid var(--border);
+        border-radius: var(--radius); padding: 40px;
+        display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px;
+      }
+      
       input, textarea {
-        width: 100%;
-        padding: 10px 12px;
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        background: var(--bg);
-        color: var(--fg);
-        font-size: var(--step--1);
-        transition: border-color 0.2s, box-shadow 0.2s;
+        width: 100%; padding: 12px; margin-bottom: 16px;
+        background: var(--bg-alt); border: 1px solid var(--border);
+        border-radius: 8px; color: var(--fg); font-family: inherit;
+        transition: border-color 0.2s;
       }
-      input:focus, textarea:focus {
-        outline: none;
-        border-color: var(--brand);
-        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-      }
-      textarea { resize: vertical; min-height: 120px; }
+      input:focus, textarea:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
 
       /* === Footer === */
-      footer {
-        margin-top: var(--space-7);
-        padding: var(--space-5) 0;
-        border-top: 1px solid var(--border);
-        background: var(--bg-alt);
-        font-size: var(--step--1);
-        color: var(--muted-2);
-      }
-      .footer-flex { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+      footer { border-top: 1px solid var(--border); padding: 40px 0; background: var(--bg-alt); color: var(--muted); font-size: 0.9rem; margin-top: var(--space-xl); }
 
-      /* === Responsive === */
+      /* === Mobile Tweak === */
       @media (max-width: 900px) {
-        .hero-grid, .grid-3, .grid-2, .contact-grid { grid-template-columns: 1fr; }
-        .nav-links { display: none; }
-        .timeline-item { grid-template-columns: 1fr; gap: 4px; }
+        .hero-grid, .grid-2, .contact-box { grid-template-columns: 1fr; gap: 30px; }
+        h1 { font-size: 2.5rem; }
       }
 
-      /* === Toast === */
+      /* === Utilities === */
       .toast {
         position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(20px);
-        background: #111827; color: #fff; padding: 12px 24px; border-radius: 999px;
-        opacity: 0; pointer-events: none; transition: 0.3s; z-index: 100;
-        font-size: var(--step--1);
+        background: #1e293b; color: #fff; padding: 10px 20px; border-radius: 50px;
+        opacity: 0; pointer-events: none; transition: 0.3s; z-index: 200; font-size: 0.9rem;
       }
       .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
     </style>
@@ -333,213 +252,249 @@
 
   <body>
     <header>
-      <div class="container nav">
-        <a class="brand" href="#top">
-          <span style="color:var(--brand);"></span>{{ config('portfolio.name', 'name') }}
+      <div class="container nav-inner">
+        <a href="#top" class="logo">
+          <i class="fas fa-server text-brand"></i> {{ config('portfolio.name', 'Portfolio') }}
         </a>
 
         <nav class="nav-links">
-          <a href="#projects">Projects</a>
+          <a href="#projects">Work</a>
           <a href="#services">Services</a>
-          <a href="#stack">Tech Stack</a>
+          <a href="#stack">Stack</a>
           <a href="#contact">Contact</a>
         </nav>
 
-        <div class="nav-actions">
-          <button class="btn btn-ghost" id="themeBtn" aria-label="Toggle theme">
-            Theme
+        <div style="display: flex; gap: 10px;">
+          <button class="btn btn-outline btn-sm" id="themeBtn" aria-label="Toggle theme">
+            <i class="fas fa-moon"></i>
           </button>
-          <a class="btn btn-primary" href="#contact">Hire Me</a>
+          <a class="btn btn-primary btn-sm" href="#contact">Hire Me</a>
         </div>
       </div>
     </header>
 
     <main id="top">
+      
       <section class="hero">
         <div class="container hero-grid">
           <div>
-            <div class="pill" aria-label="Status">
-              <span aria-hidden="true">●</span> Accepting freelance contracts
+            <div class="status-pill">
+              <div class="dot"></div> Available for New Projects
             </div>
             <h1>{{ config('portfolio.headline', 'Robust Backend Systems & Server Infrastructure.') }}</h1>
             <p class="lead">
-              I am <strong>{{ config('portfolio.name') }}</strong>, a <strong>{{ config('portfolio.subheadline', 'Laravel Developer & Systems Administrator') }}</strong>. I build secure APIs, manage Linux servers, and optimize backend performance.
+              I am <strong>{{ config('portfolio.name') }}</strong>, a <strong>{{ config('portfolio.subheadline', 'Laravel Developer & Systems Administrator') }}</strong>. 
+              I architect secure APIs, automate Linux environments, and optimize backend performance for scale.
             </p>
-            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-              <a class="btn btn-primary" href="#services">My Services</a>
-              <a class="btn" href="{{ config('portfolio.github') }}" target="_blank">GitHub</a>
-              <button class="btn" id="copyEmailBtn">Copy Email</button>
-            </div>
             
-            <div style="margin-top: var(--space-4); color: var(--muted-2); font-size: var(--step--1);">
-              📍 {{ config('portfolio.location', 'Remote') }} &nbsp;•&nbsp; Laravel &nbsp;•&nbsp; Linux &nbsp;•&nbsp; Networking
+            <div style="display: flex; gap: 16px; margin-top: 30px; flex-wrap: wrap;">
+              <a class="btn btn-primary" href="#projects">View My Work</a>
+              <a class="btn btn-outline" href="{{ config('portfolio.github') }}" target="_blank">
+                <i class="fab fa-github"></i> GitHub
+              </a>
+            </div>
+
+            <div style="margin-top: 40px; font-size: 0.9rem; color: var(--muted-2); display: flex; gap: 20px; align-items: center;">
+              <span><i class="fas fa-map-marker-alt"></i> {{ config('portfolio.location', 'Remote') }}</span>
+              <span style="height: 4px; width: 4px; background: var(--border); border-radius: 50%;"></span>
+              <span><i class="fas fa-check-circle"></i> Verified Pro</span>
             </div>
           </div>
 
           <aside class="profile-card">
             <div class="avatar">
                @if(config('portfolio.photo'))
-                <img src="{{ config('portfolio.photo') }}" alt="{{ config('portfolio.name') }}">
+                <img src="{{ config('portfolio.photo') }}" alt="{{ config('portfolio.name') }}" style="width:100%; height:100%; object-fit:cover;">
               @else
-                <div style="width:100%; height:100%; display:grid; place-items:center; background:#f1f5f9; color:#64748b; font-weight:bold;">IMG</div>
+                <div style="width:100%; height:100%; background:#e2e8f0; display:grid; place-items:center; color:#64748b;"><i class="fas fa-user fa-2x"></i></div>
               @endif
             </div>
-            <h3>Backend & Ops</h3>
-            <p style="font-size: 0.9em; margin-top:8px;">Focusing on server stability, security, and clean architecture.</p>
+            <h3>Backend & Ops Specialist</h3>
+            <p style="font-size: 0.9rem; margin-bottom: 0;">Specializing in high-availability systems and clean code architecture.</p>
             
-            <div class="stats-grid">
-              <div class="stat-item"><strong>99.9%</strong><span>Uptime</span></div>
-              <div class="stat-item"><strong>API</strong><span>First</span></div>
-              <div class="stat-item"><strong>Root</strong><span>Access</span></div>
+            <div class="stats-row">
+              <div class="stat"><h4>15+</h4><span>Years</span></div>
+              <div class="stat"><h4>99.9%</h4><span>Uptime</span></div>
+              <div class="stat"><h4>100%</h4><span>Secure</span></div>
             </div>
           </aside>
         </div>
       </section>
 
-      <section id="projects">
+      <section id="projects" class="section">
         <div class="container">
-          <div class="section-head">
+          <div class="section-header">
             <div>
-              <h2>Recent Projects</h2>
-              <p>Backend logic, server automation, and system administration.</p>
+              <h2>Featured Projects</h2>
+              <p style="margin-bottom: 0;">A selection of backend architectures and automation scripts.</p>
             </div>
-            <a class="btn btn-ghost" href="{{ config('portfolio.github') }}">View Code on GitHub →</a>
+            <a href="{{ config('portfolio.github') }}" class="btn btn-outline btn-sm">View All Code →</a>
           </div>
 
           <div class="grid-3">
+            
             <a href="/test-nutrition">
-            <article class="card project-card">
-              <div class="project-thumb">PHP</div>
-              <div class="project-content">
-                <h3>SaaS Backend API</h3>
-                <p>Architected a multi-tenant API using Laravel. Handled authentication, subscription billing, and job queues.</p>
-                <ul class="tags">
-                  <li class="tag">Laravel 10</li><li class="tag">Redis</li><li class="tag">MySQL</li>
-                </ul>
-              </div>
-            </article>
+              <article class="card">
+                <div class="terminal-thumb">
+                  <i class="fab fa-php"></i>
+                  <span class="text-mono">api/routes.php</span>
+                </div>
+                <div class="card-body">
+                  <h3>SaaS Nutrition API</h3>
+                  <p>A multi-tenant REST API built with Laravel. Features include external API integration (Edamam), caching layers, and rate limiting.</p>
+                  <div class="tags">
+                    <span class="tag">Laravel 10</span>
+                    <span class="tag">Redis</span>
+                    <span class="tag">REST API</span>
+                  </div>
+                </div>
+              </article>
             </a>
 
             <a href="/homelab">
-            <article class="card project-card">
-              <div class="project-thumb">SSH</div>
-              <div class="project-content">
-                <h3>Home Lab & DNS Cluster</h3>
-                <p>Custom BIND9 setup managed via DuckDNS. Self-hosted services behind Nginx reverse proxies with automated SSL.</p>
-                <ul class="tags">
-                  <li class="tag">Linux</li><li class="tag">BIND9</li><li class="tag">DuckDNS</li>
-                </ul>
-              </div>
-            </article>
+              <article class="card">
+                <div class="terminal-thumb">
+                  <i class="fas fa-network-wired"></i>
+                  <span class="text-mono">/etc/bind/named.conf</span>
+                </div>
+                <div class="card-body">
+                  <h3>Home Lab & DNS Cluster</h3>
+                  <p>Enterprise-grade network simulation. Custom BIND9 setup managed via DuckDNS with Nginx reverse proxies and automated SSL.</p>
+                  <div class="tags">
+                    <span class="tag">Linux</span>
+                    <span class="tag">BIND9</span>
+                    <span class="tag">Docker</span>
+                  </div>
+                </div>
+              </article>
             </a>
 
             <a href="/server-automation">
-            <article class="card project-card">
-              <div class="project-thumb">./sh</div>
-              <div class="project-content">
-                <h3>Server Automation Scripts</h3>
-                <p>Bash and Python scripts to automate server provisioning, backups, and log rotation for client VPS instances.</p>
-                <ul class="tags">
-                  <li class="tag">Bash</li><li class="tag">Cron</li><li class="tag">Python</li>
+              <article class="card">
+                <div class="terminal-thumb">
+                  <i class="fas fa-terminal"></i>
+                  <span class="text-mono">./provision_vps.sh</span>
+                </div>
+                <div class="card-body">
+                  <h3>Server Automation</h3>
+                  <p>A suite of Bash and Python scripts to automate server provisioning, disaster recovery backups, and log rotation.</p>
+                  <div class="tags">
+                    <span class="tag">Bash</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">Cron</span>
+                  </div>
+                </div>
+              </article>
+            </a>
+
+          </div>
+        </div>
+      </section>
+
+      <section id="services" class="section" style="background: var(--bg-alt);">
+        <div class="container">
+          <div class="grid-2">
+            <div>
+              <h2>What I Bring to the Table</h2>
+              <p>I bridge the gap between complex backend logic and the servers that run them.</p>
+              <a href="#contact" class="btn btn-primary">Let's Discuss Your Project</a>
+            </div>
+            
+            <div class="grid-2 service-list"> <div class="service-item">
+                <i class="fab fa-laravel fa-2x text-brand mb-3"></i>
+                <h3>Laravel Development</h3>
+                <ul>
+                  <li><i class="fas fa-check"></i> Custom API Architecture</li>
+                  <li><i class="fas fa-check"></i> Database Optimization (MySQL)</li>
+                  <li><i class="fas fa-check"></i> Payment Integrations (Stripe)</li>
+                  <li><i class="fas fa-check"></i> Job Queues & Workers</li>
                 </ul>
               </div>
-            </article>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section id="services" style="background: var(--bg-alt);">
-        <div class="container">
-          <div class="section-head">
-            <h2>What I Offer</h2>
-          </div>
-          <div class="grid-2">
-            <div class="card kpi-card">
-              <h3>Laravel Development</h3>
-              <p>I build custom software solutions that are secure and scalable.</p>
-              <ul>
-                <li>API Development (REST/GraphQL)</li>
-                <li>Database Design & Optimization</li>
-                <li>Payment Gateway Integration</li>
-              </ul>
-            </div>
-            <div class="card kpi-card">
-              <h3>Linux & Server Management</h3>
-              <p>I handle the infrastructure so you can focus on your business.</p>
-              <ul>
-                <li>VPS Setup (Ubuntu/Debian/CentOS)</li>
-                <li>DNS Configuration (BIND9, DuckDNS)</li>
-                <li>Web Server Tuning (Nginx/Apache)</li>
-                <li>Security Hardening & Firewalls</li>
-              </ul>
+              <div class="service-item">
+                <i class="fas fa-linux fa-2x text-brand mb-3"></i>
+                <h3>Linux Administration</h3>
+                <ul>
+                  <li><i class="fas fa-check"></i> VPS Provisioning (Ubuntu)</li>
+                  <li><i class="fas fa-check"></i> Nginx & Apache Config</li>
+                  <li><i class="fas fa-check"></i> DNS Management</li>
+                  <li><i class="fas fa-check"></i> Security Hardening (UFW)</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="stack">
+      <section id="stack" class="section">
         <div class="container">
-          <div class="section-head">
-            <h2>Technical Stack</h2>
-          </div>
-          <div class="card" style="padding: var(--space-4);">
-             <p style="margin-bottom: 12px;"><strong>Languages & Frameworks:</strong> PHP (Laravel), Python, Bash, SQL.</p>
-             <p style="margin-bottom: 12px;"><strong>Server & OS:</strong> Ubuntu Server, Debian, CentOS.</p>
-             <p style="margin-bottom: 0;"><strong>Tools:</strong> Git, Docker, Composer, Nginx, BIND9, UFW, Fail2Ban.</p>
+          <h2>Technical Stack</h2>
+          <div class="stack-container">
+            <div class="stack-pill"><i class="fab fa-php"></i> PHP 8.2+</div>
+            <div class="stack-pill"><i class="fab fa-laravel"></i> Laravel</div>
+            <div class="stack-pill"><i class="fab fa-python"></i> Python</div>
+            <div class="stack-pill"><i class="fas fa-database"></i> MySQL / MariaDB</div>
+            <div class="stack-pill"><i class="fas fa-server"></i> Nginx</div>
+            <div class="stack-pill"><i class="fab fa-docker"></i> Docker</div>
+            <div class="stack-pill"><i class="fab fa-ubuntu"></i> Ubuntu</div>
+            <div class="stack-pill"><i class="fas fa-terminal"></i> Bash Scripting</div>
+            <div class="stack-pill"><i class="fab fa-git-alt"></i> Git</div>
           </div>
         </div>
       </section>
 
-      <section id="contact">
+      <section id="contact" class="section">
         <div class="container">
-          <div class="section-head">
-            <h2>Hire Me</h2>
-          </div>
-          <div class="card" style="padding: var(--space-6);">
-            <div class="contact-grid">
-              <div>
-                <h3>Available for Freelance</h3>
-                <p>Need a Laravel expert or someone to fix your server config? Send me the details and I'll get back to you with a quote.</p>
-                
-                <div style="margin-top: 24px;">
-                   <a class="btn" href="mailto:{{ config('portfolio.email') }}" style="width:100%; justify-content:center;">
-                     ✉️ &nbsp; {{ config('portfolio.email') }}
-                   </a>
-                </div>
-                <div style="margin-top: 12px; display:flex; gap:10px;">
-                   <a class="btn btn-ghost" href="{{ config('portfolio.linkedin') }}" style="flex:1; justify-content:center;">LinkedIn</a>
-                   <a class="btn btn-ghost" href="{{ config('portfolio.github') }}" style="flex:1; justify-content:center;">GitHub</a>
+          <div class="contact-box">
+            <div>
+              <h2>Let's Work Together</h2>
+              <p>Whether you need a new backend feature or a server audit, I'm available for freelance contracts.</p>
+              
+              <div style="margin-top: 30px;">
+                <p class="mb-2"><strong>Email Me:</strong></p>
+                <div style="display: flex; gap: 10px;">
+                  <input type="text" value="{{ config('portfolio.email') }}" readonly id="emailInput" style="margin:0; width: auto; flex:1;">
+                  <button class="btn btn-primary" id="copyEmailBtn">Copy</button>
                 </div>
               </div>
-
-              <form id="contactForm">
-                <div class="form-group">
-                  <label for="name">Name / Company</label>
-                  <input type="text" id="name" name="name" placeholder="John from Agency X" required>
-                </div>
-                <div class="form-group">
-                  <label for="email">Email</label>
-                  <input type="email" id="email" name="email" placeholder="john@example.com" required>
-                </div>
-                <div class="form-group">
-                  <label for="message">Project Details</label>
-                  <textarea id="message" name="message" placeholder="I need a Laravel backend for..." required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Request Quote</button>
-              </form>
+              
+              <div style="margin-top: 30px;">
+                <a href="{{ config('portfolio.linkedin') }}" class="btn btn-outline" style="width: 100%; justify-content: center;">
+                  <i class="fab fa-linkedin"></i> Connect on LinkedIn
+                </a>
+              </div>
             </div>
+
+            <form id="contactForm">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                  <label>Name</label>
+                  <input type="text" name="name" required placeholder="John Doe">
+                </div>
+                <div>
+                  <label>Email</label>
+                  <input type="email" name="email" required placeholder="john@company.com">
+                </div>
+              </div>
+              <label>Project Details</label>
+              <textarea name="message" rows="5" required placeholder="I need help with..."></textarea>
+              <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+            </form>
           </div>
         </div>
       </section>
+
     </main>
 
     <footer>
-      <div class="container footer-flex">
-        <div>&copy; <span id="year"></span> {{ config('portfolio.name') }}. Built with Laravel.</div>
-        <div style="display:flex; gap:20px;">
-            <a href="#top">Back to Top</a>
-            <a href="mailto:{{ config('portfolio.email') }}">Email</a>
+      <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+        <div>
+          &copy; <span id="year"></span> {{ config('portfolio.name') }}. 
+          <span style="opacity: 0.6;">Systems & Backend Architecture.</span>
+        </div>
+        <div style="display: flex; gap: 20px;">
+           <a href="#top">Back to Top</a>
+           <a href="mailto:{{ config('portfolio.email') }}">Email</a>
+           <a href="{{ config('portfolio.github') }}">GitHub</a>
         </div>
       </div>
     </footer>
@@ -550,18 +505,17 @@
       (function() {
         const EMAIL = @json(config('portfolio.email'));
         
-        // Theme Toggle
+        // --- Theme Logic ---
         const themeBtn = document.getElementById('themeBtn');
+        const themeIcon = themeBtn.querySelector('i');
+        
         function setTheme(theme) {
           document.documentElement.setAttribute('data-theme', theme);
           localStorage.setItem('theme', theme);
+          themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
         }
-        themeBtn.addEventListener('click', () => {
-          const cur = document.documentElement.getAttribute('data-theme');
-          setTheme(cur === 'light' ? 'dark' : 'light');
-        });
         
-        // Init Theme
+        // Check saved or preference
         const saved = localStorage.getItem('theme');
         if(saved) {
            setTheme(saved);
@@ -569,26 +523,27 @@
            setTheme('dark');
         }
 
-        // Year
-        document.getElementById('year').textContent = new Date().getFullYear();
+        themeBtn.addEventListener('click', () => {
+          const cur = document.documentElement.getAttribute('data-theme') || 'light';
+          setTheme(cur === 'light' ? 'dark' : 'light');
+        });
 
-        // Toast
+        // --- Utilities ---
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
         const toast = document.getElementById('toast');
         function showToast(msg) {
           toast.textContent = msg;
           toast.classList.add('show');
-          setTimeout(() => toast.classList.remove('show'), 2000);
+          setTimeout(() => toast.classList.remove('show'), 2500);
         }
 
-        // Copy Email
-        const copyBtn = document.getElementById('copyEmailBtn');
-        if(copyBtn) {
-            copyBtn.addEventListener('click', () => {
-                navigator.clipboard.writeText(EMAIL).then(() => showToast('Email copied!'));
-            });
-        }
+        // --- Copy Email ---
+        document.getElementById('copyEmailBtn').addEventListener('click', () => {
+          navigator.clipboard.writeText(EMAIL).then(() => showToast('Email copied to clipboard!'));
+        });
 
-        // Form (Mailto fallback)
+        // --- Form Handler (Mailto Fallback) ---
         const form = document.getElementById('contactForm');
         form.addEventListener('submit', (e) => {
           e.preventDefault();
@@ -596,6 +551,7 @@
           const subject = `Freelance Inquiry: ${fd.get('name')}`;
           const body = `${fd.get('message')}\n\nFrom: ${fd.get('name')} (${fd.get('email')})`;
           window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          showToast('Opening your email client...');
         });
       })();
     </script>
