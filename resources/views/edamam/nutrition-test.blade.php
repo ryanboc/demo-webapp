@@ -1,96 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edamam Nutrition Analyzer</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ config('portfolio.name') }} || API </title>
     
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8f9fa;
-        }
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-        /* Hero Section Styling */
-        .hero-section {
-            position: relative; /* <--- ADD THIS LINE */
-            background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
-            color: white;
-            background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
-            color: white;
-            padding: 60px 0;
-            margin-bottom: 40px;
-            border-radius: 0 0 20px 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .search-input {
-            height: 60px;
-            font-size: 1.2rem;
-            border-radius: 30px 0 0 30px;
-            border: none;
-            padding-left: 30px;
-        }
-
-        .search-btn {
-            border-radius: 0 30px 30px 0;
-            font-weight: 600;
-            padding: 0 30px;
-            background-color: #2c3e50;
-            border: none;
-        }
-
-        .search-btn:hover {
-            background-color: #1a252f;
-        }
-
-        /* The FDA Nutrition Label Style */
-        .nutrition-label {
-            border: 2px solid #000;
-            padding: 20px;
-            width: 100%;
-            max-width: 380px;
-            margin: 0 auto;
-            background: white;
-            font-family: 'Arial Black', 'Helvetica', sans-serif;
-            color: #000;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-        }
-        .nutrition-header {
-            font-size: 36px;
-            font-weight: 900;
-            line-height: 1;
-            border-bottom: 10px solid #000;
-            padding-bottom: 5px;
-        }
-        .nutrition-row {
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid #000;
-            padding: 5px 0;
-        }
-        .nutrition-row.thick-border {
-            border-bottom: 5px solid #000;
-        }
-        .nutrition-row.indent {
-            padding-left: 20px;
-        }
-        .label-val { font-weight: 400; font-family: 'Arial', sans-serif; }
-        .label-key { font-weight: 900; }
-        
-        /* Health Badges */
-        .badge-custom {
-            font-size: 0.8rem;
-            padding: 8px 12px;
-            margin: 3px;
-            border-radius: 50px;
-            font-weight: 500;
-        }
-    </style>
 </head>
 <body>
 

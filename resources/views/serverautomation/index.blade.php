@@ -1,121 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Server Automation Scripts</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ config('portfolio.name') }} || Server Automation</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-    <style>
-        :root {
-            --bg-dark: #0f172a;
-            --editor-bg: #1e293b;
-            --sidebar-bg: #334155;
-            --accent: #38bdf8; /* Light Blue */
-            --python-blue: #3776ab;
-            --bash-green: #4ade80;
-        }
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-        body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; color: #334155; }
-
-        /* Header Styling */
-        .page-header h1 { font-weight: 800; letter-spacing: -1px; color: var(--bg-dark); }
-        .page-header .badge { font-weight: 500; padding: 0.5em 1em; }
-
-        /* IDE (Code Editor) Window */
-        .ide-window {
-            background: var(--editor-bg);
-            border-radius: 12px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            overflow: hidden;
-            font-family: 'JetBrains Mono', monospace;
-            border: 1px solid #475569;
-        }
-
-        .ide-header {
-            background: var(--bg-dark);
-            padding: 10px 15px;
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid #334155;
-        }
-
-        .window-dots { display: flex; gap: 8px; margin-right: 20px; }
-        .dot { width: 12px; height: 12px; border-radius: 50%; }
-        .dot-red { background: #ef4444; }
-        .dot-yellow { background: #f59e0b; }
-        .dot-green { background: #22c55e; }
-
-        /* IDE Tabs */
-        .ide-tabs { display: flex; gap: 2px; }
-        .tab {
-            padding: 8px 20px;
-            color: #94a3b8;
-            font-size: 0.85rem;
-            background: var(--bg-dark);
-            cursor: pointer;
-            border-top: 2px solid transparent;
-        }
-        .tab.active {
-            background: var(--editor-bg);
-            color: #fff;
-            border-top: 2px solid var(--accent);
-        }
-        .tab i { margin-right: 8px; }
-
-        /* IDE Body (Code Area) */
-        .ide-body { padding: 25px; color: #e2e8f0; font-size: 0.9rem; line-height: 1.7; }
-        .line-num { color: #475569; margin-right: 15px; user-select: none; }
-        
-        /* Syntax Highlighting Simulation */
-        .kwd { color: #c678dd; } /* Keywords (def, import) */
-        .str { color: #98c379; } /* Strings */
-        .func { color: #61afef; } /* Functions */
-        .comment { color: #7f848e; font-style: italic; }
-        .var { color: #e06c75; } /* Variables */
-
-        /* Feature Cards (Timeline) */
-        .feature-card {
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 20px;
-            border-left: 5px solid transparent;
-            transition: transform 0.2s;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-        }
-        .feature-card:hover { transform: translateX(5px); }
-        
-        .card-provision { border-color: var(--bash-green); }
-        .card-backup { border-color: var(--python-blue); }
-        .card-logs { border-color: #f59e0b; }
-
-        .time-badge {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            color: #64748b;
-            margin-bottom: 5px;
-            display: block;
-        }
-
-        /* Button Styling */
-        .btn-back {
-            border: 2px solid #cbd5e1;
-            font-weight: 600;
-            color: #475569;
-            transition: all 0.2s;
-        }
-        .btn-back:hover {
-            background: #fff;
-            color: #0f172a;
-            border-color: #0f172a;
-            transform: translateY(-2px);
-        }
-    </style>
+    
 </head>
 <body class="p-4 p-md-5">
 
