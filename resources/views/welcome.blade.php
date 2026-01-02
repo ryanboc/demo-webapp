@@ -325,8 +325,8 @@
         <div class="container">
           <div class="section-header">
             <div>
-              <h2>Featured Projects</h2>
-              <p style="margin-bottom: 0;">A selection of backend architectures and automation scripts.</p>
+              <h2>Technical Implementations</h2>
+              <p style="margin-bottom: 0;">Demonstrations of backend architecture and server automation capabilities.</p>
             </div>
             <a href="{{ config('portfolio.github') }}" class="btn btn-outline btn-sm">View All Code →</a>
           </div>
