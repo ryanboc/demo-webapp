@@ -420,6 +420,7 @@
             </article>
             </a>
 
+            <a href="/homelab">
             <article class="card project-card">
               <div class="project-thumb">SSH</div>
               <div class="project-content">
@@ -430,7 +431,9 @@
                 </ul>
               </div>
             </article>
+            </a>
 
+            <a href="/server-automation">
             <article class="card project-card">
               <div class="project-thumb">./sh</div>
               <div class="project-content">
@@ -441,6 +444,7 @@
                 </ul>
               </div>
             </article>
+            </a>
           </div>
         </div>
       </section>
