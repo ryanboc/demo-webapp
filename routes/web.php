@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EdamamController;
 use App\Http\Controllers\HomelabController;
 use App\Http\Controllers\ServerAutomationController;
+use App\Http\Controllers\ContactController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,5 +30,8 @@ Route::get('/homelab',[HomelabController::class,'index'])->name('homelab.index')
 
 //Server Automation Routes
 Route::get('/server-automation',[ServerAutomationController::class,'index'])->name('serverautomation.index');
+
+// Contact Form Route
+Route::post('/contact-submit', [ContactController::class, 'send']);
 
 require __DIR__.'/auth.php';

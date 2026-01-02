@@ -493,7 +493,6 @@
         </div>
         <div style="display: flex; gap: 20px;">
            <a href="#top">Back to Top</a>
-           <a href="mailto:{{ config('portfolio.email') }}">Email</a>
            <a href="{{ config('portfolio.github') }}">GitHub</a>
         </div>
       </div>
@@ -545,13 +544,47 @@
 
         // --- Form Handler (Mailto Fallback) ---
         const form = document.getElementById('contactForm');
-        form.addEventListener('submit', (e) => {
-          e.preventDefault();
-          const fd = new FormData(form);
-          const subject = `Freelance Inquiry: ${fd.get('name')}`;
-          const body = `${fd.get('message')}\n\nFrom: ${fd.get('name')} (${fd.get('email')})`;
-          window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-          showToast('Opening your email client...');
+        const submitBtn = form.querySelector('button[type="submit"]');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Disable button and show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Sending...";
+
+            const formData = new FormData(form);
+            
+            try {
+                const response = await fetch('/contact-submit', {
+                    method: 'POST',
+                    headers: {
+                        // Laravel needs this CSRF token to allow the request
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Accept': 'application/json'
+                    },
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network error');
+                }
+
+                const result = await response.json();
+                
+                // Success
+                showToast('Message sent! I will get back to you soon.');
+                form.reset();
+                
+            } catch (error) {
+                // Error handling
+                showToast('Something went wrong. Please email me directly.');
+                console.error('Error:', error);
+            } finally {
+                // Reset button
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Send Message";
+            }
         });
       })();
     </script>
