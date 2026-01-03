@@ -33,7 +33,7 @@
                     <i class="fas fa-microchip mr-2 animate-pulse"></i> Auto-Pruning Active
                 </div>
                 <p class="text-xs text-slate-200 leading-relaxed mb-3">
-                    To conserve VPS resources, a Linux Cron Daemon automatically flushes this database every hour.
+                    To conserve VPS resources, a Linux Cron Daemon automatically flushes this database daily at 5pm.
                 </p>
                 <div class="font-mono text-[10px] text-slate-500 bg-black/20 p-2 rounded border border-slate-800">
                     <span class="text-green-500">root@vps:~#</span> crontab -l<br>
