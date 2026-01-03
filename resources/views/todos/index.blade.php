@@ -10,22 +10,37 @@
 
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
     
-    
     <div class="lg:col-span-4">
         <h5 class="font-bold text-slate-500 uppercase text-xs tracking-wider mb-6">
             <i class="fas fa-network-wired mr-2"></i> Current Status
         </h5>
         
         <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
-            <div class="text-4xl font-bold text-white mb-1">{{ $todos->count() }}</div>
+            <div class="flex items-baseline justify-between mb-1">
+                <div class="text-4xl font-bold text-slate-200">{{ $todos->count() }}</div>
+                <span class="text-xs text-slate-200 uppercase font-bold tracking-wider">Active Tasks</span>
+            </div>
             
-            <div class="mb-6 pt-6 border-b border-slate-700">
+            <div class="mb-6 pt-6 border-b border-slate-700 pb-6">
                 <a href="{{ route('todos.create') }}" 
-                   class="block w-full text-center py-3 px-4 mb-4 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-semibold transition shadow-lg shadow-blue-900/20">
+                   class="block w-full text-center py-3 px-4 bg-blue-600 hover:bg-blue-500 text-slate-200 rounded-lg font-semibold transition shadow-lg shadow-blue-900/20">
                     <i class="fas fa-plus mr-2"></i> Deploy New Task
                 </a>
             </div>
-        </div>
+
+            <div class="bg-slate-900/50 rounded-lg p-4 border border-slate-700/50">
+                <div class="flex items-center text-amber-500 mb-2 text-xs font-bold uppercase tracking-wider">
+                    <i class="fas fa-microchip mr-2 animate-pulse"></i> Auto-Pruning Active
+                </div>
+                <p class="text-xs text-slate-200 leading-relaxed mb-3">
+                    To conserve VPS resources, a Linux Cron Daemon automatically flushes this database every hour.
+                </p>
+                <div class="font-mono text-[10px] text-slate-500 bg-black/20 p-2 rounded border border-slate-800">
+                    <span class="text-green-500">root@vps:~#</span> crontab -l<br>
+                    0 * * * * php artisan schedule:run
+                </div>
+            </div>
+            </div>
     </div>
 
     <div class="lg:col-span-8">
@@ -55,6 +70,7 @@
                         <a href="{{ route('todos.edit', $todo->id) }}" class="p-2 text-slate-400 hover:text-yellow-400 transition">
                             <i class="fas fa-pen"></i>
                         </a>
+                        
                     </div>
                 </div>
             @empty

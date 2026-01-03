@@ -170,7 +170,24 @@
       
       .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; }
       
-      .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+      .grid-4 {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+
+      /* Make the 4 columns responsive */
+      @media (max-width: 1100px) {
+        .grid-4 {
+          grid-template-columns: repeat(2, 1fr); /* 2 columns on laptops/tablets */
+        }
+      }
+
+      @media (max-width: 600px) {
+        .grid-4 {
+          grid-template-columns: 1fr; /* 1 column on mobile */
+        }
+      }
       
       .card {
         background: var(--bg-card); border: 1px solid var(--border);
@@ -331,81 +348,81 @@
             <a href="{{ config('portfolio.github') }}" class="btn btn-outline btn-sm">View All Code →</a>
           </div>
 
-          <div class="grid-3">
-            
-            <a href="/test-nutrition">
-              <article class="card">
-                <div class="terminal-thumb">
-                  <i class="fab fa-php"></i>
-                  <span class="text-mono">api/routes.php</span>
-                </div>
-                <div class="card-body">
-                  <h3>SaaS Nutrition API</h3>
-                  <p>A multi-tenant REST API built with Laravel. Features include external API integration (Edamam), caching layers, and rate limiting.</p>
-                  <div class="tags">
-                    <span class="tag">Laravel 10</span>
-                    <span class="tag">Redis</span>
-                    <span class="tag">REST API</span>
-                  </div>
-                </div>
-              </article>
-            </a>
+          <div class="grid-4">
+  
+  <a href="/test-nutrition">
+    <article class="card">
+      <div class="terminal-thumb">
+        <i class="fab fa-php"></i>
+        <span class="text-mono">api/routes.php</span>
+      </div>
+      <div class="card-body">
+        <h3>SaaS Nutrition API</h3>
+        <p>A multi-tenant REST API built with Laravel. Features include external API integration (Edamam), caching layers, and rate limiting.</p>
+        <div class="tags">
+          <span class="tag">Laravel 10</span>
+          <span class="tag">Redis</span>
+          <span class="tag">REST API</span>
+        </div>
+      </div>
+    </article>
+  </a>
 
-            <a href="/todos">
-              <article class="card">
-                <div class="terminal-thumb">
-                  <i class="fab fa-laravel"></i>
-                  <span class="text-mono">crud/todos.php</span>
-                </div>
-                <div class="card-body">
-                  <h3>SaaS Nutrition API</h3>
-                  <p>A multi-tenant REST API built with Laravel. Features include external API integration (Edamam), caching layers, and rate limiting.</p>
-                  <div class="tags">
-                    <span class="tag">Laravel 10</span>
-                    <span class="tag">Redis</span>
-                    <span class="tag">REST API</span>
-                  </div>
-                </div>
-              </article>
-            </a>
+  <a href="/todos">
+    <article class="card">
+      <div class="terminal-thumb">
+        <i class="fab fa-laravel"></i>
+        <span class="text-mono">crud/todos.php</span>
+      </div>
+      <div class="card-body">
+        <h3>Task Manager CRUD</h3>
+        <p>A persistent Todo list application demonstrating full Create, Read, Update, Delete operations with database validation.</p>
+        <div class="tags">
+          <span class="tag">Laravel</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">Eloquent</span>
+        </div>
+      </div>
+    </article>
+  </a>
 
-            <a href="/homelab">
-              <article class="card">
-                <div class="terminal-thumb">
-                  <i class="fas fa-network-wired"></i>
-                  <span class="text-mono">/etc/bind/named.conf</span>
-                </div>
-                <div class="card-body">
-                  <h3>Home Lab & DNS Cluster</h3>
-                  <p>Enterprise-grade network simulation. Custom BIND9 setup managed via DuckDNS with Nginx reverse proxies and automated SSL.</p>
-                  <div class="tags">
-                    <span class="tag">Linux</span>
-                    <span class="tag">BIND9</span>
-                    <span class="tag">Docker</span>
-                  </div>
-                </div>
-              </article>
-            </a>
+  <a href="/homelab">
+    <article class="card">
+      <div class="terminal-thumb">
+        <i class="fas fa-network-wired"></i>
+        <span class="text-mono">/etc/bind/named.conf</span>
+      </div>
+      <div class="card-body">
+        <h3>Home Lab & DNS</h3>
+        <p>Enterprise-grade network simulation. Custom BIND9 setup managed via DuckDNS with Nginx reverse proxies and automated SSL.</p>
+        <div class="tags">
+          <span class="tag">Linux</span>
+          <span class="tag">BIND9</span>
+          <span class="tag">Docker</span>
+        </div>
+      </div>
+    </article>
+  </a>
 
-            <a href="/server-automation">
-              <article class="card">
-                <div class="terminal-thumb">
-                  <i class="fas fa-terminal"></i>
-                  <span class="text-mono">./provision_vps.sh</span>
-                </div>
-                <div class="card-body">
-                  <h3>Server Automation</h3>
-                  <p>A suite of Bash and Python scripts to automate server provisioning, disaster recovery backups, and log rotation.</p>
-                  <div class="tags">
-                    <span class="tag">Bash</span>
-                    <span class="tag">Python</span>
-                    <span class="tag">Cron</span>
-                  </div>
-                </div>
-              </article>
-            </a>
+  <a href="/server-automation">
+    <article class="card">
+      <div class="terminal-thumb">
+        <i class="fas fa-terminal"></i>
+        <span class="text-mono">./provision_vps.sh</span>
+      </div>
+      <div class="card-body">
+        <h3>Server Automation</h3>
+        <p>A suite of Bash and Python scripts to automate server provisioning, disaster recovery backups, and log rotation.</p>
+        <div class="tags">
+          <span class="tag">Bash</span>
+          <span class="tag">Python</span>
+          <span class="tag">Cron</span>
+        </div>
+      </div>
+    </article>
+  </a>
 
-          </div>
+</div>
         </div>
       </section>
 

@@ -334,6 +334,27 @@ body {
             transform: translateY(-2px);
         }
 
+        /* Add this to your main CSS file */
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Creates 4 equal columns */
+  gap: 20px; /* Adjust spacing between cards */
+}
+
+/* Make it responsive so it doesn't squish on small screens */
+@media (max-width: 1024px) {
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+  }
+}
+
+@media (max-width: 600px) {
+  .grid-4 {
+    grid-template-columns: 1fr; /* 1 column on mobile */
+  }
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
