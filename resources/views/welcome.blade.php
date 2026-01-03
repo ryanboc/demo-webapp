@@ -351,6 +351,24 @@
               </article>
             </a>
 
+            <a href="/todos">
+              <article class="card">
+                <div class="terminal-thumb">
+                  <i class="fab fa-laravel"></i>
+                  <span class="text-mono">crud/todos.php</span>
+                </div>
+                <div class="card-body">
+                  <h3>SaaS Nutrition API</h3>
+                  <p>A multi-tenant REST API built with Laravel. Features include external API integration (Edamam), caching layers, and rate limiting.</p>
+                  <div class="tags">
+                    <span class="tag">Laravel 10</span>
+                    <span class="tag">Redis</span>
+                    <span class="tag">REST API</span>
+                  </div>
+                </div>
+              </article>
+            </a>
+
             <a href="/homelab">
               <article class="card">
                 <div class="terminal-thumb">

@@ -6,6 +6,7 @@ use App\Http\Controllers\EdamamController;
 use App\Http\Controllers\HomelabController;
 use App\Http\Controllers\ServerAutomationController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\TodoController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -33,5 +34,8 @@ Route::get('/server-automation',[ServerAutomationController::class,'index'])->na
 
 // Contact Form Route
 Route::post('/contact-submit', [ContactController::class, 'send']);
+
+// Todo Routes
+Route::resource('todos', TodoController::class);
 
 require __DIR__.'/auth.php';
