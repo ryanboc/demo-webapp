@@ -358,10 +358,9 @@
       </div>
       <div class="card-body">
         <h3>SaaS Nutrition API</h3>
-        <p>A multi-tenant REST API built with Laravel. Features include external API integration (Edamam), caching layers, and rate limiting.</p>
+        <p>REST API built with Laravel. Features include external API integration (Edamam), caching layers, and rate limiting.</p>
         <div class="tags">
           <span class="tag">Laravel 10</span>
-          <span class="tag">Redis</span>
           <span class="tag">REST API</span>
         </div>
       </div>
@@ -376,7 +375,7 @@
       </div>
       <div class="card-body">
         <h3>Task Manager CRUD</h3>
-        <p>A persistent Todo list application demonstrating full Create, Read, Update, Delete operations with database validation.</p>
+        <p>Todo list application demonstrating full Create, Read, Update, Delete operations with database validation.</p>
         <div class="tags">
           <span class="tag">Laravel</span>
           <span class="tag">MySQL</span>
@@ -398,7 +397,6 @@
         <div class="tags">
           <span class="tag">Linux</span>
           <span class="tag">BIND9</span>
-          <span class="tag">Docker</span>
         </div>
       </div>
     </article>
@@ -412,10 +410,9 @@
       </div>
       <div class="card-body">
         <h3>Server Automation</h3>
-        <p>A suite of Bash and Python scripts to automate server provisioning, disaster recovery backups, and log rotation.</p>
+        <p>A suite of Bash scripts to automate server provisioning, disaster recovery backups, and log rotation.</p>
         <div class="tags">
           <span class="tag">Bash</span>
-          <span class="tag">Python</span>
           <span class="tag">Cron</span>
         </div>
       </div>
@@ -466,10 +463,11 @@
           <div class="stack-container">
             <div class="stack-pill"><i class="fab fa-php"></i> PHP 8.2+</div>
             <div class="stack-pill"><i class="fab fa-laravel"></i> Laravel</div>
-            <div class="stack-pill"><i class="fab fa-python"></i> Python</div>
+            <div class="stack-pill"><i class="fab fa-css3"></i> CSS</div>
+            <div class="stack-pill"><i class="fab fa-html5"></i> HTML</div>
+            <div class="stack-pill"><i class="fab fa-css3"></i> Tailwind CSS</div>
             <div class="stack-pill"><i class="fas fa-database"></i> MySQL / MariaDB</div>
             <div class="stack-pill"><i class="fas fa-server"></i> Nginx</div>
-            <div class="stack-pill"><i class="fab fa-docker"></i> Docker</div>
             <div class="stack-pill"><i class="fab fa-ubuntu"></i> Ubuntu</div>
             <div class="stack-pill"><i class="fas fa-terminal"></i> Bash Scripting</div>
             <div class="stack-pill"><i class="fab fa-git-alt"></i> Git</div>
