@@ -1,87 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{{ config('portfolio.name') }} || DevOps</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+@extends('layouts.app')
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-
-</head>
-<body class="p-5">
-
-<div class="container">
-
-    <div class="row mb-5">
-        <div class="col-12">
-            <a href="{{ url('/') }}" class="btn btn-outline-dark rounded-pill px-4 shadow-sm btn-back" style="border-width: 2px; font-weight: 600;">
-                <i class="fas fa-arrow-left me-2"></i> Back to Portfolio
-            </a>
-        </div>
+@section('content')
+<div class="container" style="padding: var(--space-md) 0;">
+    <div style="margin-bottom: 40px;">
+        <a href="{{ url('/') }}" class="btn btn-outline">
+            <i class="fas fa-arrow-left"></i> Back to Portfolio
+        </a>
     </div>
     
-    <div class="row mb-5">
-        <div class="col-lg-7 section-header">
-            <div class="line"></div>
-            <h2>Infrastructure & Automation</h2>
-            <p class="text-muted lead mt-3">
-                I don't just build apps; I architect the environments they live in. 
-                My home lab simulates enterprise constraints to practice high-availability deployments.
-            </p>
-        </div>
+    <div style="margin-bottom: 60px;">
+        <div style="width: 50px; height: 4px; background: var(--brand); margin-bottom: 20px;"></div>
+        <h1 style="font-size: 2.5rem;">Infrastructure & Automation</h1>
+        <p style="color: var(--muted); font-size: 1.1rem; max-width: 800px;">
+            I architect the environments apps live in. My home lab simulates enterprise constraints to practice high-availability deployments.
+        </p>
     </div>
 
-    <div class="row g-5">
-        
-        <div class="col-lg-5">
-            <h5 class="fw-bold mb-4 text-uppercase text-secondary small ls-1">
-                <i class="fas fa-sitemap me-2"></i> Custom DNS Cluster
-            </h5>
+    <div class="grid-2">
+        <div>
+            <h3 class="text-mono" style="font-size: 0.8rem; color: var(--muted); letter-spacing: 1px; margin-bottom: 24px;">
+                <i class="fas fa-sitemap"></i> CUSTOM DNS CLUSTER
+            </h3>
             
             <div class="flow-container">
-                <div class="flow-line"></div> 
+                <div class="flow-line"></div>
                 
                 <div class="flow-card">
-                    <div class="flow-icon me-3 text-primary"><i class="fas fa-globe"></i></div>
-                    <div class="flow-content">
+                    <div class="flow-icon" style="color: #3b82f6;"><i class="fas fa-globe"></i></div>
+                    <div class="flow-content" style="margin-left: 15px;">
                         <h5>Ingress Traffic</h5>
                         <p>Dynamic IP Resolution via DuckDNS</p>
                     </div>
                 </div>
 
                 <div class="flow-card">
-                    <div class="flow-icon me-3 text-warning"><i class="fas fa-network-wired"></i></div>
-                    <div class="flow-content">
+                    <div class="flow-icon" style="color: #eab308;"><i class="fas fa-network-wired"></i></div>
+                    <div class="flow-content" style="margin-left: 15px;">
                         <h5>BIND9 Master Server</h5>
                         <p>Split-Horizon DNS & Custom Zone Files</p>
                     </div>
                 </div>
 
                 <div class="flow-card">
-                    <div class="flow-icon me-3 text-success"><i class="fas fa-server"></i></div>
-                    <div class="flow-content">
+                    <div class="flow-icon" style="color: #22c55e;"><i class="fas fa-server"></i></div>
+                    <div class="flow-content" style="margin-left: 15px;">
                         <h5>Nginx Reverse Proxy</h5>
                         <p>SSL Termination & Load Balancing</p>
                     </div>
                 </div>
+            </div>
 
-                <div class="mt-4 ps-2">
-                    <span class="badge bg-white text-dark border me-1">Ubuntu Server</span>
-                    <span class="badge bg-white text-dark border me-1">Docker</span>
-                    <span class="badge bg-white text-dark border">UFW Firewall</span>
-                </div>
+            <div style="margin-top: 20px; display: flex; gap: 8px;">
+                <span class="tag">Ubuntu Server</span>
+                <span class="tag">Docker</span>
+                <span class="tag">UFW Firewall</span>
             </div>
         </div>
 
-        <div class="col-lg-7">
-            <h5 class="fw-bold mb-4 text-uppercase text-secondary small ls-1">
-                <i class="fas fa-code me-2"></i> Server Automation
-            </h5>
+        <div>
+            <h3 class="text-mono" style="font-size: 0.8rem; color: var(--muted); letter-spacing: 1px; margin-bottom: 24px;">
+                <i class="fas fa-code"></i> SERVER AUTOMATION
+            </h3>
 
             <div class="terminal-window">
                 <div class="terminal-header">
@@ -90,55 +69,35 @@
                         <div class="control min"></div>
                         <div class="control max"></div>
                     </div>
-                    <div class="terminal-title">admin@vps-01: ~/scripts</div>
+                    <div style="margin-left: auto; font-family: var(--font-mono); font-size: 0.7rem; opacity: 0.5;">admin@vps-01: ~/scripts</div>
                 </div>
                 <div class="terminal-body">
-                    <div class="mb-2">
-                        <span class="cmd-prompt">➜</span>
-                        <span class="cmd-path">~/ops</span>
-                        <span class="cmd-text">./provision.py --target=client_vps</span>
+                    <div style="margin-bottom: 12px;">
+                        <span class="cmd-prompt">➜</span><span class="cmd-path">~/ops</span><span class="cmd-text">./provision.py --target=client_vps</span>
                     </div>
-
-                    <div class="log-info mb-1">[INFO] Connecting to target via SSH...</div>
-                    <div class="log-info mb-1">[INFO] detecting OS: Ubuntu 22.04 LTS</div>
-                    <div class="log-comment mb-2"># Initiating security hardening protocol</div>
+                    <div class="log-info">[INFO] Connecting to target via SSH...</div>
+                    <div class="log-info">[INFO] detecting OS: Ubuntu 22.04 LTS</div>
+                    <div class="log-comment"># Initiating security hardening protocol</div>
                     
-                    <div class="d-flex justify-content-between text-muted small mb-1" style="max-width: 400px;">
+                    <div style="display: flex; justify-content: space-between; margin-top: 10px;">
                         <span>Updating APT repositories</span>
                         <span class="log-success">DONE (2.1s)</span>
                     </div>
-                    <div class="d-flex justify-content-between text-muted small mb-1" style="max-width: 400px;">
+                    <div style="display: flex; justify-content: space-between;">
                         <span>Configuring Fail2Ban</span>
                         <span class="log-success">DONE (0.4s)</span>
                     </div>
-                    <div class="d-flex justify-content-between text-muted small mb-1" style="max-width: 400px;">
-                        <span>Rotating Logs</span>
-                        <span class="log-warn">SKIPPED (Clean)</span>
-                    </div>
 
-                    <div class="log-success mt-3">
-                        <i class="fas fa-check-circle me-1"></i> 
-                        <strong>Provisioning Complete.</strong> System ready in 14s.
-                    </div>
-
-                    <div class="mt-3">
-                        <span class="cmd-prompt">➜</span>
-                        <span class="cmd-path">~/ops</span>
-                        <span class="cursor"></span>
+                    <div class="log-success" style="margin-top: 20px; font-weight: bold;">
+                        <i class="fas fa-check-circle"></i> Provisioning Complete. System ready in 14s.
                     </div>
                 </div>
             </div>
 
-            <div class="mt-4 text-muted small">
-                <p>
-                    <strong>Why this matters:</strong> I write Python and Bash scripts to automate the boring stuff. 
-                    This script reduces VPS setup time from 30 minutes to seconds, ensuring consistent security compliance for client instances.
-                </p>
-            </div>
+            <p style="margin-top: 24px; font-size: 0.9rem; color: var(--muted);">
+                <strong>Why this matters:</strong> I write Python and Bash scripts to automate the boring stuff, reducing setup time from 30 minutes to seconds.
+            </p>
         </div>
-
     </div>
 </div>
-
-</body>
-</html>
+@endsection
