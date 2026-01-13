@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Todo;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TodoController extends Controller
 {
@@ -28,16 +29,17 @@ class TodoController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required|min:3|max:255'
-        ]);
+{
+    $request->validate([
+        'title' => 'required|min:3|max:255'
+    ]);
 
-        Todo::create($request->all());
+    Todo::create($request->all());
 
-        return redirect()->route('todos.index')
-            ->with('success', 'Task created successfully!');
-    }
+    Alert::toast('Task created successfully!', 'success')->position('top-end');
+
+    return redirect()->route('todos.index');
+}
 
     /**
      * Display the specified resource.
@@ -66,8 +68,9 @@ class TodoController extends Controller
 
         $todo->update($request->all());
 
-        return redirect()->route('todos.index')
-            ->with('success', 'Task updated successfully!');
+        Alert::toast('Task updated successfully!', 'success')->position('top-end');
+
+        return redirect()->route('todos.index');
     }
 
     /**

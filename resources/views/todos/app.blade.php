@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <style>
         /* === LIGHT THEME VARIABLES === */
@@ -92,6 +93,20 @@
             background-color: #f0f9ff !important; /* Light blue bg for icon */
             border-color: #e0f2fe !important;
         }
+
+        /* Sweet Alert */
+        .swal2-popup.swal2-toast {
+            background-color: #1e293b !important; /* Matches your UI */
+            color: #f1f5f9 !important;           /* Light text */
+        }
+        .swal2-title {
+            color: #f1f5f9 !important;           /* Title text */
+        }
+        .swal2-success-circular-line-left, 
+        .swal2-success-circular-line-right, 
+        .swal2-success-fix {
+            background-color: transparent !important; /* Fixes white circles in dark mode */
+        } 
     </style>
 </head>
 <body class="antialiased min-h-screen p-6 sm:p-12">
@@ -128,15 +143,21 @@
                 @endif
             </div>
         </div>
-        @if(session('success'))
-            <div class="mb-8 bg-green-50 border border-green-200 text-green-700 p-4 rounded-lg flex items-center font-mono text-sm shadow-sm">
-                <i class="fas fa-check-circle mr-3 text-green-500"></i>
-                <span>[SUCCESS] {{ session('success') }}</span>
-            </div>
-        @endif
-
         @yield('content')
-        
+
+        @include('sweetalert::alert')
+         @if (session('success'))
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: "{{ session('success') }}",
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    });
+                });
+            </script>
+         @endif
     </div>
 
 </body>
