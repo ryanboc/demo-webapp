@@ -300,8 +300,7 @@
             </div>
             <h1>{{ config('portfolio.headline', 'Robust Backend Systems & Server Infrastructure.') }}</h1>
             <p class="lead">
-              I am <strong>{{ config('portfolio.name') }}</strong>, a <strong>{{ config('portfolio.subheadline', 'Laravel Developer & Systems Administrator') }}</strong>. 
-              I architect secure APIs, automate Linux environments, and optimize backend performance for scale.
+              I am <strong>{{ config('portfolio.name') }}</strong>, a <strong>Software Engineer specializing in high-performance Laravel applications and robust Linux infrastructure.</strong> I bridge the gap between complex code and the servers that power them.
             </p>
             
             <div style="display: flex; gap: 16px; margin-top: 30px; flex-wrap: wrap;">
