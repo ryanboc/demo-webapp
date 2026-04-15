@@ -72,18 +72,22 @@
                             $protein = $data['totalNutrients']['PROCNT']['quantity'] ?? 0;
                             $fat = $data['totalNutrients']['FAT']['quantity'] ?? 0;
                             $carbs = $data['totalNutrients']['CHOCDF']['quantity'] ?? 0;
-                            $total = $protein + $fat + $carbs;
-                            
-                            // Prevent division by zero
-                            if($total > 0) {
-                                $p_pct = ($protein / $total) * 100;
-                                $f_pct = ($fat / $total) * 100;
-                                $c_pct = ($carbs / $total) * 100;
+
+                            // Convert to calories
+                            $protein_cal = $protein * 4;
+                            $carbs_cal = $carbs * 4;
+                            $fat_cal = $fat * 9;
+
+                            $total_cal = $protein_cal + $carbs_cal + $fat_cal;
+
+                            if ($total_cal > 0) {
+                                $p_pct = ($protein_cal / $total_cal) * 100;
+                                $f_pct = ($fat_cal / $total_cal) * 100;
+                                $c_pct = ($carbs_cal / $total_cal) * 100;
                             } else {
                                 $p_pct = $f_pct = $c_pct = 0;
                             }
                         @endphp
-                        
                         <div class="progress" style="height: 25px;">
                             <div class="progress-bar bg-info" role="progressbar" style="width: {{ $c_pct }}%" title="Carbs"></div>
                             <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $f_pct }}%" title="Fat"></div>
@@ -112,32 +116,32 @@
 
                         <div class="nutrition-row">
                             <span><span class="label-key">Total Fat</span> <span class="label-val">{{ round($data['totalNutrients']['FAT']['quantity'] ?? 0, 1) }}g</span></span>
-                            <span class="label-key">{{ round($data['totalDaily']['FAT']['quantity'] ?? 0) }}%</span>
+                            <span class="label-key">{{ round($data['totalDaily']['FAT']['quantity'] ?? 0, 1) }}%</span>
                         </div>
 
                         <div class="nutrition-row indent">
                             <span><span class="label-val">Saturated Fat</span> <span class="label-val">{{ round($data['totalNutrients']['FASAT']['quantity'] ?? 0, 1) }}g</span></span>
-                            <span class="label-key">{{ round($data['totalDaily']['FASAT']['quantity'] ?? 0) }}%</span>
+                            <span class="label-key">{{ round($data['totalDaily']['FASAT']['quantity'] ?? 0, 1) }}%</span>
                         </div>
 
                         <div class="nutrition-row">
                             <span><span class="label-key">Cholesterol</span> <span class="label-val">{{ round($data['totalNutrients']['CHOLE']['quantity'] ?? 0, 1) }}mg</span></span>
-                            <span class="label-key">{{ round($data['totalDaily']['CHOLE']['quantity'] ?? 0) }}%</span>
+                            <span class="label-key">{{ round($data['totalDaily']['CHOLE']['quantity'] ?? 0, 1) }}%</span>
                         </div>
 
                         <div class="nutrition-row">
                             <span><span class="label-key">Sodium</span> <span class="label-val">{{ round($data['totalNutrients']['NA']['quantity'] ?? 0, 1) }}mg</span></span>
-                            <span class="label-key">{{ round($data['totalDaily']['NA']['quantity'] ?? 0) }}%</span>
+                            <span class="label-key">{{ round($data['totalDaily']['NA']['quantity'] ?? 0, 1) }}%</span>
                         </div>
 
                         <div class="nutrition-row">
                             <span><span class="label-key">Total Carbohydrate</span> <span class="label-val">{{ round($data['totalNutrients']['CHOCDF']['quantity'] ?? 0, 1) }}g</span></span>
-                            <span class="label-key">{{ round($data['totalDaily']['CHOCDF']['quantity'] ?? 0) }}%</span>
+                            <span class="label-key">{{ round($data['totalDaily']['CHOCDF']['quantity'] ?? 0, 1) }}%</span>
                         </div>
 
                         <div class="nutrition-row indent">
                             <span><span class="label-val">Dietary Fiber</span> <span class="label-val">{{ round($data['totalNutrients']['FIBTG']['quantity'] ?? 0, 1) }}g</span></span>
-                            <span class="label-key">{{ round($data['totalDaily']['FIBTG']['quantity'] ?? 0) }}%</span>
+                            <span class="label-key">{{ round($data['totalDaily']['FIBTG']['quantity'] ?? 0, 1) }}%</span>
                         </div>
 
                         <div class="nutrition-row indent">
@@ -146,7 +150,7 @@
 
                         <div class="nutrition-row thick-border">
                             <span><span class="label-key">Protein</span> <span class="label-val">{{ round($data['totalNutrients']['PROCNT']['quantity'] ?? 0, 1) }}g</span></span>
-                            <span class="label-key">{{ round($data['totalDaily']['PROCNT']['quantity'] ?? 0) }}%</span>
+                            <span class="label-key">{{ round($data['totalDaily']['PROCNT']['quantity'] ?? 0, 1) }}%</span>
                         </div>
 
                         <div class="small mt-2">
