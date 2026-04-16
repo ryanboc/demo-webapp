@@ -355,6 +355,53 @@ body {
   }
 }
 
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+.grid-2-wide {
+    grid-template-columns: 1fr 2fr;
+}
+
+@media (max-width: 768px) {
+    .grid-2-wide {
+        grid-template-columns: 1fr;
+    }
+}
+
+.tag-container {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .tag-container {
+        justify-content: flex-start;
+        margin-top: 10px;
+    }
+}
+
+.ide-body {
+    overflow-x: auto;
+    font-size: 0.85rem;
+}
+
+.ide-window {
+    width: 100%;
+    overflow: hidden;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

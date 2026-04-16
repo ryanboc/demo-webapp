@@ -18,14 +18,14 @@
                 I automate the critical lifecycle of client VPS instances.
             </p>
         </div>
-        <div style="display: flex; gap: 8px; justify-content: flex-end;">
+        <div class="tag-container">
             <span class="tag">Python 3.11</span>
             <span class="tag">Bash</span>
             <span class="tag">Cron</span>
         </div>
     </div>
 
-    <div class="grid-2" style="grid-template-columns: 1fr 2fr;">
+    <div class="grid-2 grid-2-wide">
         <div>
             <h6 class="text-mono" style="font-size: 0.8rem; color: var(--muted-2); margin-bottom: 24px; letter-spacing: 1px;">
                 <i class="fas fa-clock"></i> AUTOMATION CYCLE
