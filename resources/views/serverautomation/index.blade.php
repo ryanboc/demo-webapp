@@ -14,14 +14,16 @@
         <div>
             <h1 style="margin-bottom: 16px;">Server Automation Suite</h1>
             <p style="color: var(--muted); font-size: 1.1rem;">
-                I build self-healing infrastructure. Using <span style="color: var(--fg); font-weight: 700;">Python</span> and <span style="color: var(--fg); font-weight: 700;">Bash</span>, 
-                I automate the critical lifecycle of client VPS instances.
+                I build reliable server automation using <span style="color: var(--fg); font-weight: 700;">Bash scripting</span> and 
+                <span style="color: var(--fg); font-weight: 700;">cron jobs</span>. 
+                My focus is on simplifying repetitive tasks like backups, deployments, and server setup for Linux-based environments.
             </p>
         </div>
         <div class="tag-container">
-            <span class="tag">Python 3.11</span>
             <span class="tag">Bash</span>
             <span class="tag">Cron</span>
+            <span class="tag">rsync</span>
+            <span class="tag">SSH</span>
         </div>
     </div>
 
@@ -33,14 +35,18 @@
 
             <div class="feature-card">
                 <span class="time-badge"><i class="fas fa-bolt" style="color: #22c55e;"></i> On Demand</span>
-                <h3 style="font-size: 1.1rem; margin-bottom: 8px;">Zero-Touch Provisioning</h3>
-                <p style="font-size: 0.9rem; color: var(--muted);">Bash scripts that bootstrap a fresh VPS: SSH hardening and dependencies in < 60s.</p>
+                <h3 style="font-size: 1.1rem; margin-bottom: 8px;">Server Provisioning Scripts</h3>
+                <p style="font-size: 0.9rem; color: var(--muted);">
+                    Bash scripts to quickly bootstrap servers: installing packages, configuring services, and applying basic SSH hardening.
+                </p>
             </div>
 
             <div class="feature-card">
-                <span class="time-badge"><i class="fas fa-history" style="color: var(--brand);"></i> Daily @ 03:00 UTC</span>
-                <h3 style="font-size: 1.1rem; margin-bottom: 8px;">Auto-Healing Backups</h3>
-                <p style="font-size: 0.9rem; color: var(--muted);">Python utilizing <code>boto3</code> to compress and sync encrypted archives to S3 storage.</p>
+                <span class="time-badge"><i class="fas fa-history" style="color: var(--brand);"></i> Scheduled (Daily)</span>
+                <h3 style="font-size: 1.1rem; margin-bottom: 8px;">Automated Backups</h3>
+                <p style="font-size: 0.9rem; color: var(--muted);">
+                    Cron-driven backup jobs using <code>rsync</code> over SSH to securely sync files to remote servers, ensuring redundancy and data safety.
+                </p>
             </div>
         </div>
 
@@ -51,29 +57,36 @@
 
             <div class="ide-window">
                 <div class="ide-header">
-                    <div class="window-dots"><div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div></div>
+                    <div class="window-dots">
+                        <div class="dot dot-red"></div>
+                        <div class="dot dot-yellow"></div>
+                        <div class="dot dot-green"></div>
+                    </div>
                     <div class="ide-tabs">
-                        <div class="tab active"><i class="fab fa-python" style="color: #eab308;"></i> backup_core.py</div>
-                        <div class="tab"><i class="fas fa-terminal" style="color: #22c55e;"></i> provision.sh</div>
+                        <div class="tab active">
+                            <i class="fas fa-terminal" style="color: #22c55e;"></i> backup.sh
+                        </div>
+                        <div class="tab">
+                            <i class="fas fa-terminal" style="color: #22c55e;"></i> provision.sh
+                        </div>
                     </div>
                 </div>
                 <div class="ide-body">
-                    <div><span class="line-num">01</span><span class="kwd">import</span> boto3</div>
-                    <div><span class="line-num">02</span><span class="kwd">import</span> os</div>
-                    <div><span class="line-num">03</span><span class="comment"># Connect to S3 for Off-site Storage</span></div>
-                    <div><span class="line-num">04</span><span class="kwd">def</span> <span class="func">upload_backup</span>(<span class="var">file_name</span>):</div>
-                    <div><span class="line-num">05</span>&nbsp;&nbsp;&nbsp;&nbsp;s3 = boto3.client(<span class="str">'s3'</span>)</div>
-                    <div><span class="line-num">06</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">try</span>:</div>
-                    <div><span class="line-num">07</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s3.upload_file(<span class="var">file_name</span>, <span class="str">'backups'</span>, <span class="var">file_name</span>)</div>
+                    <div><span class="line-num">01</span><span class="comment"># Sync local data to remote backup server</span></div>
+                    <div><span class="line-num">02</span>rsync -avz --delete /var/www/ user@backup-server:/backups/www/</div>
+                    <div><span class="line-num">03</span></div>
+                    <div><span class="line-num">04</span><span class="comment"># Example cron entry (runs daily at 3AM)</span></div>
+                    <div><span class="line-num">05</span>0 3 * * * /home/user/scripts/backup.sh</div>
                 </div>
             </div>
 
             <div class="card" style="margin-top: 30px; display: flex; gap: 20px; align-items: start;">
                 <i class="fas fa-info-circle" style="color: var(--brand); font-size: 1.2rem; margin-top: 4px;"></i>
                 <div>
-                    <h4 style="font-size: 1rem; margin-bottom: 4px;">Why Custom Scripts?</h4>
+                    <h4 style="font-size: 1rem; margin-bottom: 4px;">Why Bash Automation?</h4>
                     <p style="font-size: 0.9rem; color: var(--muted);">
-                        Custom scripts offer lower overhead for lightweight VPS instances, providing built-in error handling and direct Slack/SMS alerts.
+                        Lightweight and efficient, Bash scripts are ideal for small to medium environments where simplicity, control, and reliability matter.
+                        Using native Linux tools keeps overhead low while maintaining full transparency of the system.
                     </p>
                 </div>
             </div>

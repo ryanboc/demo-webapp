@@ -14,60 +14,6 @@ class EdamamController extends Controller
         return view('edamam.nutrition-test');
     }
 
-    // public function analyze(Request $request)
-    // {
-    //     $request->validate([
-    //         'ingredient' => 'required|string|max:255',
-    //     ]);
-
-    //     $ingredient = $request->input('ingredient');
-    //     $cacheKey = 'nutrition_analysis_' . Str::slug($ingredient);
-
-       
-    //     $data = Cache::remember($cacheKey, 60 * 60, function () use ($ingredient) {
-    //         $response = Http::get('https://api.edamam.com/api/nutrition-data', [
-    //             'app_id' => config('services.edamam.app_id'),
-    //             'app_key' => config('services.edamam.app_key'),
-    //             'ingr' => $ingredient,
-    //         ]);
-
-    //         if ($response->successful()) {
-    //             return $response->json();
-    //         }
-    //         return null;
-    //     });
-
-        
-    //     if (!$data) {
-    //          return back()->withErrors('API Connection Failed.');
-    //     }
-
-        
-    //     if (!isset($data['calories']) && isset($data['ingredients'][0]['parsed'][0])) {
-    //         $parsed = $data['ingredients'][0]['parsed'][0];
-            
-            
-    //         $data['totalNutrients'] = $parsed['nutrients'];
-            
-            
-    //         $data['calories'] = $parsed['nutrients']['ENERC_KCAL']['quantity'] ?? 0;
-    //         $data['totalWeight'] = $parsed['weight'] ?? 0;
-            
-            
-    //         $data['dietLabels'] = $data['dietLabels'] ?? [];
-    //         $data['healthLabels'] = $data['healthLabels'] ?? [];
-    //         $data['totalDaily'] = $data['totalDaily'] ?? []; 
-    //     }
-
-        
-    //     if (!isset($data['totalNutrients'])) {
-    //         Cache::forget($cacheKey);
-    //         return back()->withErrors('Could not understand that ingredient. Try "100g chicken breast".');
-    //     }
-
-    //     return view('edamam.nutrition-test', ['data' => $data, 'ingredient' => $ingredient]);
-    // }
-
     public function analyze(Request $request)
     {
         $request->validate([

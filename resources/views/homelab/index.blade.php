@@ -29,14 +29,14 @@
                     <div class="flow-icon" style="color: #3b82f6;"><i class="fas fa-globe"></i></div>
                     <div class="flow-content" style="margin-left: 15px;">
                         <h5>Ingress Traffic</h5>
-                        <p>Dynamic IP Resolution via DuckDNS</p>
+                        <p>Dynamic IP Resolution via Cloudflare</p>
                     </div>
                 </div>
 
                 <div class="flow-card">
                     <div class="flow-icon" style="color: #eab308;"><i class="fas fa-network-wired"></i></div>
                     <div class="flow-content" style="margin-left: 15px;">
-                        <h5>BIND9 Master Server</h5>
+                        <h5>BIND9 Server</h5>
                         <p>Split-Horizon DNS & Custom Zone Files</p>
                     </div>
                 </div>

@@ -1,86 +1,104 @@
-@extends('todos.app')
+@extends('layouts.app')
 
 @section('content')
-<div class="mb-10">
-    <a href="{{ url('/') }}" 
-       class="inline-flex items-center bg-white border border-slate-600 rounded-full px-6 py-2 text-slate-700 font-semibold shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200">
-        <i class="fas fa-arrow-left mr-2"></i> Back to Portfolio
-    </a>
-</div>
-
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<div class="container" style="padding: var(--space-md) 0;">
     
-    <div class="lg:col-span-4">
-        <h5 class="font-bold text-slate-500 uppercase text-xs tracking-wider mb-6">
-            <i class="fas fa-network-wired mr-2"></i> Current Status
-        </h5>
-        
-        <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
-            <div class="flex items-baseline justify-between mb-1">
-                <div class="text-4xl font-bold text-slate-200">{{ $todos->count() }}</div>
-                <span class="text-xs text-slate-200 uppercase font-bold tracking-wider">Active Tasks</span>
-            </div>
-            
-            <div class="mb-6 pt-6 border-b border-slate-700 pb-6">
-                <a href="{{ route('todos.create') }}" 
-                   class="block w-full text-center py-3 px-4 bg-blue-600 hover:bg-blue-500 text-slate-200 rounded-lg font-semibold transition shadow-lg shadow-blue-900/20">
-                    <i class="fas fa-plus mr-2"></i> Deploy New Task
-                </a>
-            </div>
-
-            <div class="bg-slate-900/50 rounded-lg p-4 border border-slate-700/50">
-                <div class="flex items-center text-amber-500 mb-2 text-xs font-bold uppercase tracking-wider">
-                    <i class="fas fa-microchip mr-2 animate-pulse"></i> Auto-Pruning Active
-                </div>
-                <p class="text-xs text-slate-200 leading-relaxed mb-3">
-                    To conserve VPS resources, a Linux Cron Daemon automatically flushes this database daily at 5pm.
-                </p>
-                <div class="font-mono text-[10px] text-slate-500 bg-black/20 p-2 rounded border border-slate-800">
-                    <span class="text-green-500">root@vps:~#</span> crontab -l<br>
-                    0 * * * * php artisan schedule:run
-                </div>
-            </div>
-            </div>
+    <div style="margin-bottom: 40px;">
+        <a href="{{ url('/') }}" class="btn btn-outline">
+            <i class="fas fa-arrow-left"></i> Back to Portfolio
+        </a>
     </div>
 
-    <div class="lg:col-span-8">
-        <h5 class="font-bold text-slate-500 uppercase text-xs tracking-wider mb-6">
-            <i class="fas fa-stream mr-2"></i> Task Stream
-        </h5>
-
-        <div class="relative pl-8 border-l-2 border-dashed border-slate-700 ml-4 space-y-6">
-            
-            @forelse($todos as $todo)
-                <div class="flow-card relative p-5 flex items-center justify-between group">
-                    <div class="absolute -left-[43px] top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-slate-800 border-2 border-slate-600 group-hover:border-blue-500 group-hover:bg-blue-900 transition-colors"></div>
-
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 rounded-lg bg-slate-900 border border-slate-700 flex items-center justify-center text-blue-400 mr-4">
-                            <i class="fas fa-terminal"></i>
-                        </div>
-                        <div>
-                            <h5 class="text-lg font-bold text-slate-100">{{ $todo->title }}</h5>
-                            <p class="text-xs text-slate-500 font-mono mt-1">
-                                ID: {{ substr(md5($todo->id), 0, 8) }} &bull; {{ $todo->created_at->diffForHumans() }}
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="flex space-x-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <a href="{{ route('todos.edit', $todo->id) }}" class="p-2 text-slate-400 hover:text-yellow-400 transition">
-                            <i class="fas fa-pen"></i>
-                        </a>
-                        
-                    </div>
-                </div>
-            @empty
-                <div class="text-slate-500 italic font-mono pl-4">
-                    // No active processes found. System idle.
-                </div>
-            @endforelse
-
+    <div class="grid-2" style="align-items: end; margin-bottom: var(--space-lg);">
+        <div>
+            <h1 style="margin-bottom: 16px;">Laravel CRUD <span style="color: var(--muted-2);">&&</span> Ops</h1>
+            <p style="color: var(--muted); font-size: 1.1rem;">
+                Orchestrate your daily objectives with high availability. A streamlined Laravel web-app system utilizing 
+                <span style="color: var(--fg); font-weight: 700;">Laravel</span> and 
+                <span style="color: var(--fg); font-weight: 700;">cron scheduling</span> for automated resource pruning and database maintenance.
+            </p>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <span class="tag">Laravel</span>
+            <span class="tag">PHP</span>
+            <span class="tag">Cron</span>
+            <span class="tag">CRUD</span>
         </div>
     </div>
 
+    <div class="grid-1-2">
+        
+        <div>
+            <h6 class="text-mono" style="font-size: 0.8rem; color: var(--muted-2); margin-bottom: 24px; letter-spacing: 1px;">
+                <i class="fas fa-network-wired"></i> CURRENT STATUS
+            </h6>
+            
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--fg);">{{ $todos->count() }}</div>
+                    <span style="font-size: 0.75rem; color: var(--muted); text-transform: uppercase; font-weight: 700; letter-spacing: 1px;">Active Tasks</span>
+                </div>
+                
+                <div style="margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--border);">
+                    <a href="{{ route('todos.create') }}" class="btn" style="background: var(--brand); color: #fff; width: 100%; justify-content: center; padding: 12px; font-size: 1rem;">
+                        <i class="fas fa-plus"></i> Deploy New Task
+                    </a>
+                </div>
+
+                <div class="terminal-window">
+                    <div class="terminal-body" style="padding: 16px;">
+                        <div style="color: #ffbd2e; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; letter-spacing: 1px;">
+                            <i class="fas fa-microchip" style="animation: pulse 2s infinite;"></i> Auto-Pruning Active
+                        </div>
+                        <p style="font-size: 0.85rem; margin-bottom: 16px; color: #cbd5e1;">
+                            To conserve VPS resources, a Linux Cron Daemon automatically flushes this database daily at 5pm.
+                        </p>
+                        <div style="background: rgba(0,0,0,0.4); padding: 10px; border-radius: 6px; border: 1px solid #334155;">
+                            <span class="cmd-prompt">root@vps:~#</span> <span class="cmd-text">crontab -l</span><br>
+                            <span class="cmd-text" style="color: #4ade80;">0 * * * * php artisan schedule:run</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h6 class="text-mono" style="font-size: 0.8rem; color: var(--muted-2); margin-bottom: 24px; letter-spacing: 1px;">
+                <i class="fas fa-stream"></i> TASK STREAM
+            </h6>
+
+            <div class="flow-container">
+                <div class="flow-line"></div>
+                
+                @forelse($todos as $todo)
+                    <div class="flow-card" style="justify-content: space-between;">
+                        <div style="display: flex; align-items: center; gap: 16px;">
+                            <div class="flow-icon" style="color: var(--brand);">
+                                <i class="fas fa-terminal"></i>
+                            </div>
+                            <div class="flow-content">
+                                <h5>{{ $todo->title }}</h5>
+                                <p style="font-family: var(--font-mono); margin-top: 4px;">
+                                    ID: {{ substr(md5($todo->id), 0, 8) }} &bull; {{ $todo->created_at->diffForHumans() }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <a href="{{ route('todos.edit', $todo->id) }}" style="color: var(--muted); text-decoration: none; padding: 8px; transition: 0.2s;" onmouseover="this.style.color='var(--brand)'" onmouseout="this.style.color='var(--muted)'">
+                                <i class="fas fa-pen"></i>
+                            </a>
+                        </div>
+                    </div>
+                @empty
+                    <div style="color: var(--muted); font-style: italic; font-family: var(--font-mono); padding-left: 20px;">
+                        // No active processes found. System idle.
+                    </div>
+                @endforelse
+
+            </div>
+        </div>
+
+    </div>
 </div>
 @endsection
