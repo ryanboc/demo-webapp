@@ -359,7 +359,7 @@
         <h3>SaaS Nutrition API</h3>
         <p>REST API built with Laravel. Features include external API integration (Edamam), caching layers, and rate limiting.</p>
         <div class="tags">
-          <span class="tag">Laravel 10</span>
+          <span class="tag">Laravel</span>
           <span class="tag">REST API</span>
         </div>
       </div>
@@ -396,6 +396,8 @@
         <div class="tags">
           <span class="tag">Linux</span>
           <span class="tag">BIND9</span>
+          <span class="tag">NGINX</span>
+          <span class="tag">Cloudflare</span>
         </div>
       </div>
     </article>
