@@ -1,12 +1,17 @@
-@extends('todos.app')
+@extends('layouts.app')
 
 @section('content')
-
-<div class="max-w-3xl mx-auto">
+<div class="container" style="padding: var(--space-md) 0;">
     
-    <div class="mb-6">
-        <h2 class="text-xl font-bold text-white"><i class="fas fa-code mr-2 text-green-400"></i> Initiate Process</h2>
-        <p class="text-slate-400 text-sm">Define the parameters for the new task below.</p>
+    <div style="margin-bottom: 40px;">
+        <a href="{{ route('todos.index') }}" class="btn btn-outline">
+            <i class="fas fa-arrow-left"></i> Abort & Return
+        </a>
+    </div>
+
+    <div style="margin-bottom: var(--space-lg);">
+        <h1 style="margin-bottom: 16px;"><i class="fas fa-code" style="color: #4ade80;"></i> Initiate Process</h1>
+        <p style="color: var(--muted); font-size: 1.1rem;">Define the parameters for the new task below.</p>
     </div>
 
     <div class="terminal-window">
@@ -16,53 +21,52 @@
                 <div class="control min"></div>
                 <div class="control max"></div>
             </div>
-            <div class="text-slate-500 text-xs ml-auto">user@laravel: ~/tasks/create</div>
+            <div style="color: #94a3b8; font-size: 0.75rem; margin-left: auto;">user@laravel: ~/tasks/create</div>
         </div>
 
-        <div class="p-6 sm:p-8 bg-slate-900/90 text-slate-300">
-            
+        <div class="terminal-body" style="padding: 32px;">
             <form action="{{ route('todos.store') }}" method="POST">
                 @csrf
                 
-                <div class="mb-2 font-mono text-sm">
-                    <span class="text-green-500">➜</span>
-                    <span class="text-blue-400">~/ops</span>
-                    <span class="text-slate-100">./create_task.sh --title="<span class="text-yellow-300">input_below</span>"</span>
+                <div style="margin-bottom: 24px; font-size: 0.85rem;">
+                    <span class="cmd-prompt">➜</span>
+                    <span class="cmd-path">~/ops</span>
+                    <span class="cmd-text">./create_task.sh --title="<span style="color: #ffbd2e;">input_below</span>"</span>
                 </div>
 
-                <div class="mt-6">
-                    <label for="title" class="block text-xs uppercase font-bold text-slate-500 mb-2 tracking-wider">
+                <div style="margin-bottom: 32px;">
+                    <label for="title" style="display: block; font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: #64748b; margin-bottom: 8px; letter-spacing: 1px;">
                         Target Name (Title)
                     </label>
                     
                     <input type="text" 
                            name="title" 
                            id="title" 
-                           class="w-full bg-slate-800 border border-slate-600 text-white rounded p-3 font-mono focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
+                           style="width: 100%; box-sizing: border-box; background: rgba(0,0,0,0.2); border: 1px solid #334155; color: #f8fafc; border-radius: 6px; padding: 16px; font-family: var(--font-mono); font-size: 1rem; outline: none; transition: 0.2s;"
+                           onfocus="this.style.borderColor='#3b82f6'; this.style.boxShadow='0 0 0 1px #3b82f6'"
+                           onblur="this.style.borderColor='#334155'; this.style.boxShadow='none'"
                            placeholder="Enter task name..."
                            value="{{ old('title') }}"
                            autofocus>
                     
                     @error('title')
-                        <p class="text-red-400 font-mono text-xs mt-2">
-                            <i class="fas fa-exclamation-triangle mr-1"></i> [ERROR] {{ $message }}
+                        <p style="color: #ff5f56; font-size: 0.8rem; margin-top: 8px; font-family: var(--font-mono);">
+                            <i class="fas fa-exclamation-triangle"></i> [ERROR] {{ $message }}
                         </p>
                     @enderror
                 </div>
 
-                <div class="mt-8 flex items-center justify-between border-t border-slate-700 pt-6">
-                    <a href="{{ route('todos.index') }}" class="text-slate-500 hover:text-white text-sm font-mono transition">
-                        <i class="fas fa-times mr-1"></i> ABORT
+                <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #334155; padding-top: 24px;">
+                    <a href="{{ route('todos.index') }}" style="color: #64748b; text-decoration: none; font-size: 0.85rem; font-family: var(--font-mono); transition: 0.2s;" onmouseover="this.style.color='#f8fafc'" onmouseout="this.style.color='#64748b'">
+                        <i class="fas fa-times"></i> ABORT
                     </a>
                     
-                    <button type="submit" class="bg-green-600 hover:bg-green-500 text-white px-6 py-2 rounded text-sm font-bold font-mono tracking-wide transition shadow-lg shadow-green-900/20">
-                        <i class="fas fa-play mr-2"></i> EXECUTE
+                    <button type="submit" class="btn" style="background: #27c93f; color: #0f172a; border: none; font-weight: 800; font-family: var(--font-mono); padding: 10px 24px;">
+                        <i class="fas fa-play"></i> EXECUTE
                     </button>
                 </div>
-
             </form>
         </div>
     </div>
 </div>
-
 @endsection
