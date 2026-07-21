@@ -264,165 +264,687 @@
         opacity: 0; pointer-events: none; transition: 0.3s; z-index: 200; font-size: 0.9rem;
       }
       .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-    </style>
-  </head>
 
-  <body>
-    <header>
-      <div class="container nav-inner">
-        <a href="#top" class="logo">
-          <i class="fas fa-server text-brand"></i> {{ config('portfolio.name', 'Portfolio') }}
-        </a>
+      .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    }
 
-        <nav class="nav-links">
-          <a href="#projects">Work</a>
-          <a href="#services">Services</a>
-          <a href="#stack">Stack</a>
-          <a href="#contact">Contact</a>
-        </nav>
+    .grid-3 > a {
+        display: block;
+        min-width: 0;
+        color: inherit;
+        text-decoration: none;
+    }
 
-        <div style="display: flex; gap: 10px;">
-          <button class="btn btn-outline btn-sm" id="themeBtn" aria-label="Toggle theme">
-            <i class="fas fa-moon"></i>
-          </button>
-          <a class="btn btn-primary btn-sm" href="#contact">Hire Me</a>
-        </div>
-      </div>
-    </header>
+    .grid-3 .card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
 
-    <main id="top">
-      
-      <section class="hero">
-        <div class="container hero-grid">
-          <div>
-            <div class="status-pill">
-              <div class="dot"></div> Available for New Projects
-            </div>
-            <h1>{{ config('portfolio.headline', 'Robust Backend Systems & Server Infrastructure.') }}</h1>
-            <p class="lead">
-              I am <strong>{{ config('portfolio.name') }}</strong>, a <strong>Software Engineer specializing in high-performance Laravel applications and robust Linux infrastructure.</strong> I bridge the gap between complex code and the servers that power them.
-            </p>
-            
-            <div style="display: flex; gap: 16px; margin-top: 30px; flex-wrap: wrap;">
-              <a class="btn btn-primary" href="#projects">View My Work</a>
-              <a class="btn btn-outline" href="{{ config('portfolio.github') }}" target="_blank">
-                <i class="fab fa-github"></i> GitHub
-              </a>
-            </div>
+    .grid-3 .card-body {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+    }
 
-            <div style="margin-top: 40px; font-size: 0.9rem; color: var(--muted-2); display: flex; gap: 20px; align-items: center;">
-              <span><i class="fas fa-map-marker-alt"></i> {{ config('portfolio.location', 'Remote') }}</span>
-              <span style="height: 4px; width: 4px; background: var(--border); border-radius: 50%;"></span>
-              <span><i class="fas fa-check-circle"></i> Verified Pro</span>
+    .grid-3 .tags {
+        margin-top: auto;
+        padding-top: 20px;
+    }
+
+    .case-study-link {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 18px;
+        color: var(--primary);
+        font-size: 0.9rem;
+        font-weight: 700;
+    }
+
+    .case-study-link i {
+        font-size: 0.75rem;
+        transition: transform 0.2s ease;
+    }
+
+    .grid-3 > a:hover .case-study-link i {
+        transform: translateX(4px);
+    }
+
+    @media (max-width: 992px) {
+        .grid-3 {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @media (max-width: 700px) {
+        .grid-3 {
+            grid-template-columns: 1fr;
+        }
+    }
+    .case-study-trigger {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.case-study-trigger .card {
+    height: 100%;
+}
+
+.case-study-trigger:focus-visible {
+    border-radius: 14px;
+    outline: 3px solid var(--primary);
+    outline-offset: 4px;
+}
+
+.case-study-modal {
+    position: fixed;
+    inset: 0;
+    width: min(960px, calc(100% - 32px));
+    max-height: calc(100vh - 40px);
+    margin: auto;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: var(--surface);
+    color: var(--text);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+}
+
+.case-study-modal::backdrop {
+    background: rgba(3, 10, 24, 0.82);
+    backdrop-filter: blur(6px);
+}
+
+.case-study-modal-container {
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+}
+
+.case-study-modal-header {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 28px 32px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+}
+
+.case-study-modal-header h2 {
+    margin: 8px 0 0;
+    font-size: clamp(1.6rem, 4vw, 2.3rem);
+    line-height: 1.2;
+}
+
+.case-study-category {
+    color: var(--primary);
+    font-family: monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.case-study-close {
+    display: grid;
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+    place-items: center;
+}
+
+.case-study-close:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.case-study-modal-body {
+    padding: 32px;
+}
+
+.case-study-summary {
+    max-width: 800px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.75;
+}
+
+.case-study-modal-tags {
+    margin: 24px 0 32px;
+}
+
+.case-study-content-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.case-study-content-section {
+    margin-bottom: 20px;
+    padding: 24px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--surface-2);
+}
+
+.case-study-content-section p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+.case-study-section-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.case-study-section-heading i {
+    color: var(--primary);
+}
+
+.case-study-section-heading h3 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.case-study-feature-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 24px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.case-study-feature-list li {
+    position: relative;
+    padding-left: 24px;
+    color: var(--muted);
+    line-height: 1.55;
+}
+
+.case-study-feature-list li::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: var(--primary);
+    content: "✓";
+    font-weight: 700;
+}
+
+.case-study-outcome {
+    border-color: color-mix(in srgb, var(--primary) 40%, var(--border));
+}
+
+.case-study-confidentiality {
+    margin: 12px 0 0;
+    color: var(--muted-2);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.case-study-confidentiality i {
+    margin-right: 6px;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+@media (max-width: 700px) {
+    .case-study-modal {
+        width: calc(100% - 20px);
+        max-height: calc(100vh - 20px);
+    }
+
+    .case-study-modal-container {
+        max-height: calc(100vh - 20px);
+    }
+
+    .case-study-modal-header,
+    .case-study-modal-body {
+        padding: 22px;
+    }
+
+    .case-study-content-grid,
+    .case-study-feature-list {
+        grid-template-columns: 1fr;
+    }
+}
+        </style>
+      </head>
+
+      <body>
+        <header>
+          <div class="container nav-inner">
+            <a href="#top" class="logo">
+              <i class="fas fa-server text-brand"></i> {{ config('portfolio.name', 'Portfolio') }}
+            </a>
+
+            <nav class="nav-links">
+              <a href="#projects">Work</a>
+              <a href="#services">Services</a>
+              <a href="#stack">Stack</a>
+              <a href="#contact">Contact</a>
+            </nav>
+
+            <div style="display: flex; gap: 10px;">
+              <button class="btn btn-outline btn-sm" id="themeBtn" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+              </button>
+              <a class="btn btn-primary btn-sm" href="#contact">Hire Me</a>
             </div>
           </div>
+        </header>
 
-          <aside class="profile-card">
-            <div class="avatar">
-               @if(config('portfolio.photo'))
-                <img src="{{ config('portfolio.photo') }}" alt="{{ config('portfolio.name') }}" style="width:100%; height:100%; object-fit:cover;">
-              @else
-                <div style="width:100%; height:100%; background:#e2e8f0; display:grid; place-items:center; color:#64748b;"><i class="fas fa-user fa-2x"></i></div>
-              @endif
+        <main id="top">
+          
+          <section class="hero">
+            <div class="container hero-grid">
+              <div>
+                  <h1>
+                      {{ config(
+                          'portfolio.headline',
+                          'Senior Laravel Developer & Linux Systems Administrator'
+                      ) }}
+                  </h1>
+
+                  <p class="lead">
+                      I’m <strong>{{ config('portfolio.name', 'Ryan Boc') }}</strong>.
+                      I build and operate production systems for warehouses,
+                      manufacturing and agriculture—from barcode traceability and
+                      operational reporting to APIs, automation and Linux infrastructure.
+                  </p>
+
+                  <div style="
+                      display: flex;
+                      gap: 16px;
+                      margin-top: 30px;
+                      flex-wrap: wrap;
+                  ">
+                      <a class="btn btn-primary" href="#projects">
+                          View Case Studies
+                      </a>
+
+                      <a
+                          class="btn btn-outline"
+                          href="{{ asset('documents/Ryan-Boc-CV.pdf') }}"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                      >
+                          <i class="fas fa-file-arrow-down"></i>
+                          Download CV
+                      </a>
+                  </div>
+
+                  <div style="
+                      margin-top: 40px;
+                      font-size: 0.9rem;
+                      color: var(--muted-2);
+                      display: flex;
+                      gap: 20px;
+                      align-items: center;
+                      flex-wrap: wrap;
+                  ">
+                      <span>
+                          <i class="fas fa-map-marker-alt"></i>
+                          {{ config('portfolio.location', 'Brisbane / Toowoomba / Remote') }}
+                      </span>
+
+                      <span class="hero-separator"></span>
+
+                      <a
+                          href="{{ config('portfolio.linkedin') }}"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style="color: inherit; text-decoration: none;"
+                      >
+                          <i class="fab fa-linkedin"></i>
+                          LinkedIn
+                      </a>
+
+                      <a
+                          href="{{ config('portfolio.github') }}"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style="color: inherit; text-decoration: none;"
+                      >
+                          <i class="fab fa-github"></i>
+                          GitHub
+                      </a>
+                  </div>
+              </div>
+
+              <aside class="profile-card">
+    <img
+        src="{{ asset('img/8053598.jpeg') }}"
+        alt="{{ config('portfolio.name', 'Ryan Boc') }}"
+        class="profile-image"
+    >
+
+    <h3>Backend & Infrastructure Specialist</h3>
+
+    <p>
+        From application architecture and database design to deployment,
+        automation and production support.
+    </p>
+
+    <div class="profile-stats">
+        <div class="profile-stat">
+            <strong>15+</strong>
+            <span>Years Experience</span>
+        </div>
+
+        <div class="profile-stat">
+            <strong>Laravel</strong>
+            <span>Backend Systems</span>
+        </div>
+
+        <div class="profile-stat">
+            <strong>Linux</strong>
+            <span>Infrastructure</span>
+        </div>
+    </div>
+</aside>
             </div>
-            <h3>Backend & Ops Specialist</h3>
-            <p style="font-size: 0.9rem; margin-bottom: 0;">Specializing in high-availability systems and clean code architecture.</p>
-            
-            <div class="stats-row">
-              <div class="stat"><h4>15+</h4><span>Years</span></div>
-              <div class="stat"><h4>99.9%</h4><span>Uptime</span></div>
-              <div class="stat"><h4>100%</h4><span>Secure</span></div>
+          </section>
+
+          <section id="projects" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <h2>Featured Case Studies</h2>
+
+                        <p style="margin-bottom: 0;">
+                            Production systems I have designed, developed and maintained
+                            across warehouse operations, agricultural management and
+                            workforce integrations.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid-3">
+
+                {{-- Ishida Barcode and Shipping Label Case Study --}}
+                    <button
+                            type="button"
+                            class="case-study-trigger"
+                            data-case-study="production-barcode"
+                        >
+                        <article class="card">
+                            <div class="terminal-thumb">
+                                <i class="fas fa-qrcode"></i>
+
+                                <span class="text-mono">
+                                    case-study/production-barcodes
+                                </span>
+                            </div>
+
+                            <div class="card-body">
+                                <h3>Production Barcode, Labelling & Traceability</h3>
+
+                                <p>
+                                    A production barcode system that scans 1D and GS1-128
+                                    2D barcodes, validates product information, generates
+                                    shipping labels and stores production records for
+                                    end-to-end traceability.
+                                </p>
+
+                                <div class="tags">
+                                    <span class="tag">Laravel</span>
+                                    <span class="tag">1D / 2D</span>
+                                    <span class="tag">GS1-128</span>
+                                    <span class="tag">Ishida</span>
+                                    <span class="tag">Label Printing</span>
+                                </div>
+
+                                <div class="case-study-link">
+                                    View Case Study
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                            </div>
+                        </article>
+                    </button>
+
+                    {{-- Warehouse Case Study --}}
+                    <button
+                          type="button"
+                          class="case-study-trigger"
+                          data-case-study="warehouse"
+                      >
+                        <article class="card">
+                            <div class="terminal-thumb">
+                                <i class="fas fa-barcode"></i>
+
+                                <span class="text-mono">
+                                    case-study/warehouse
+                                </span>
+                            </div>
+
+                            <div class="card-body">
+                                <h3>Warehouse Barcode & Pallet Traceability</h3>
+
+                                <p>
+                                    A Laravel-based warehouse system for tracing products
+                                    and pallets through receiving, storage, transfer and
+                                    dispatch using GS1 barcodes and Honeywell scanning
+                                    equipment.
+                                </p>
+
+                                <div class="tags">
+                                    <span class="tag">Laravel</span>
+                                    <span class="tag">MySQL</span>
+                                    <span class="tag">GS1-128</span>
+                                    <span class="tag">Honeywell</span>
+                                </div>
+
+                                <div class="case-study-link">
+                                    View Case Study
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                            </div>
+                        </article>
+                    </button>
+
+                    {{-- Plant and Farm Operations Case Study --}}
+                    <button
+                          type="button"
+                          class="case-study-trigger"
+                          data-case-study="operations"
+                      >
+                        <article class="card">
+                            <div class="terminal-thumb">
+                                <i class="fas fa-seedling"></i>
+
+                                <span class="text-mono">
+                                    case-study/operations
+                                </span>
+                            </div>
+
+                            <div class="card-body">
+                                <h3>Plant & Farm Operations Platform</h3>
+
+                                <p>
+                                    A collection of production systems supporting orders,
+                                    inventory, invoicing, livestock records, operational
+                                    reporting and automated business rules across plant
+                                    and farm environments.
+                                </p>
+
+                                <div class="tags">
+                                    <span class="tag">PHP</span>
+                                    <span class="tag">MySQL</span>
+                                    <span class="tag">Reporting</span>
+                                </div>
+
+                                <div class="case-study-link">
+                                    View Case Study
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                            </div>
+                        </article>
+                    </button>
+
+                    {{-- Workforce Integration Case Study --}}
+              <button
+                  type="button"
+                  class="case-study-trigger"
+                  data-case-study="workforce-api"
+              >
+                  <article class="card">
+                      <div class="terminal-thumb">
+                          <i class="fas fa-exchange-alt"></i>
+
+                          <span class="text-mono">
+                              case-study/workforce-api
+                          </span>
+                      </div>
+
+                      <div class="card-body">
+                          <h3>Workforce Event API Integration</h3>
+
+                          <p>
+                              A Laravel REST API integration that receives workforce
+                              clocking events, retrieves employee information and connects
+                              production-floor attendance devices with internal systems.
+                          </p>
+
+                          <div class="tags">
+                              <span class="tag">Laravel</span>
+                              <span class="tag">REST API</span>
+                              <span class="tag">Webhooks</span>
+                              <span class="tag">Cloudflare</span>
+                          </div>
+
+                          <div class="case-study-link">
+                              View Case Study
+                              <i class="fas fa-arrow-right"></i>
+                          </div>
+                      </div>
+                  </article>
+              </button>
+
+                    
+
+                </div>
+
+                <p class="case-study-note">
+                    Case studies are presented at a high level to protect confidential
+                    company information, customer data and proprietary source code.
+                </p>
             </div>
-          </aside>
-        </div>
-      </section>
+        </section>
 
-      <section id="projects" class="section">
-        <div class="container">
-          <div class="section-header">
-            <div>
-              <h2>Technical Implementations</h2>
-              <p style="margin-bottom: 0;">Technical Demonstrations of Laravel, backend architecture and server automation capabilities.</p>
+        <dialog id="caseStudyModal" class="case-study-modal">
+        <div class="case-study-modal-container">
+            <header class="case-study-modal-header">
+                <div>
+                    <span id="caseStudyCategory" class="case-study-category">
+                        Case Study
+                    </span>
+
+                    <h2 id="caseStudyTitle"></h2>
+                </div>
+
+                <button
+                    type="button"
+                    class="case-study-close"
+                    aria-label="Close case study"
+                >
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+
+            <div class="case-study-modal-body">
+                <p id="caseStudySummary" class="case-study-summary"></p>
+
+                <div id="caseStudyTags" class="tags case-study-modal-tags"></div>
+
+                <div class="case-study-content-grid">
+                    <section class="case-study-content-section">
+                        <div class="case-study-section-heading">
+                            <i class="fas fa-circle-exclamation"></i>
+                            <h3>The Challenge</h3>
+                        </div>
+
+                        <p id="caseStudyChallenge"></p>
+                    </section>
+
+                    <section class="case-study-content-section">
+                        <div class="case-study-section-heading">
+                            <i class="fas fa-lightbulb"></i>
+                            <h3>The Solution</h3>
+                        </div>
+
+                        <p id="caseStudySolution"></p>
+                    </section>
+                </div>
+
+                <section class="case-study-content-section">
+                    <div class="case-study-section-heading">
+                        <i class="fas fa-list-check"></i>
+                        <h3>Key Capabilities</h3>
+                    </div>
+
+                    <ul id="caseStudyFeatures" class="case-study-feature-list"></ul>
+                </section>
+
+                <section class="case-study-content-section">
+                    <div class="case-study-section-heading">
+                        <i class="fas fa-user-gear"></i>
+                        <h3>My Responsibilities</h3>
+                    </div>
+
+                    <ul id="caseStudyResponsibilities"
+                        class="case-study-feature-list"></ul>
+                </section>
+
+                <section class="case-study-content-section case-study-outcome">
+                    <div class="case-study-section-heading">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Outcome</h3>
+                    </div>
+
+                    <p id="caseStudyOutcome"></p>
+                </section>
+
+                <p class="case-study-confidentiality">
+                    <i class="fas fa-lock"></i>
+
+                    This case study is presented at a high level to protect
+                    confidential company information, customer data and
+                    proprietary source code.
+                </p>
             </div>
-            <a href="{{ config('portfolio.github') }}" class="btn btn-outline btn-sm">View All Code →</a>
-          </div>
-
-          <div class="grid-4">
-  
-  <a href="/test-nutrition">
-    <article class="card">
-      <div class="terminal-thumb">
-        <i class="fab fa-php"></i>
-        <span class="text-mono">api/routes.php</span>
-      </div>
-      <div class="card-body">
-        <h3>SaaS Nutrition API</h3>
-        <p>REST API built with Laravel. Features include external API integration (Edamam), caching layers, and rate limiting.</p>
-        <div class="tags">
-          <span class="tag">Laravel</span>
-          <span class="tag">REST API</span>
         </div>
-      </div>
-    </article>
-  </a>
-
-  <a href="/todos">
-    <article class="card">
-      <div class="terminal-thumb">
-        <i class="fab fa-laravel"></i>
-        <span class="text-mono">crud/todos.php</span>
-      </div>
-      <div class="card-body">
-        <h3>Task Manager CRUD</h3>
-        <p>Todo list application demonstrating full Create, Read, Update, Delete operations with database validation.</p>
-        <div class="tags">
-          <span class="tag">Laravel</span>
-          <span class="tag">MySQL</span>
-          <span class="tag">Eloquent</span>
-        </div>
-      </div>
-    </article>
-  </a>
-
-  <a href="/homelab">
-    <article class="card">
-      <div class="terminal-thumb">
-        <i class="fas fa-network-wired"></i>
-        <span class="text-mono">/etc/bind/named.conf</span>
-      </div>
-      <div class="card-body">
-        <h3>Home Lab & DNS</h3>
-        <p>Enterprise-grade network simulation. Custom BIND9 setup managed via DuckDNS with Nginx reverse proxies and automated SSL.</p>
-        <div class="tags">
-          <span class="tag">Linux</span>
-          <span class="tag">BIND9</span>
-          <span class="tag">NGINX</span>
-          <span class="tag">Cloudflare</span>
-        </div>
-      </div>
-    </article>
-  </a>
-
-  <a href="/server-automation">
-    <article class="card">
-      <div class="terminal-thumb">
-        <i class="fas fa-terminal"></i>
-        <span class="text-mono">./provision_vps.sh</span>
-      </div>
-      <div class="card-body">
-        <h3>Server Automation</h3>
-        <p>A suite of Bash scripts to automate server provisioning, disaster recovery backups, and log rotation.</p>
-        <div class="tags">
-          <span class="tag">Bash</span>
-          <span class="tag">Cron</span>
-        </div>
-      </div>
-    </article>
-  </a>
-
-</div>
-        </div>
-      </section>
+    </dialog>
 
       <section id="services" class="section" style="background: var(--bg-alt);">
         <div class="container">
@@ -523,7 +1045,7 @@
       <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
         <div>
           &copy; <span id="year"></span> {{ config('portfolio.name') }}. 
-          <span style="opacity: 0.6;">Systems & Backend Architecture.</span>
+          <span style="opacity: 0.6;">Laravel Developer and Linux Server Administrator.</span>
         </div>
         <div style="display: flex; gap: 20px;">
            <a href="#top">Back to Top</a>
@@ -622,5 +1144,368 @@
         });
       })();
     </script>
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const caseStudies = {
+        warehouse: {
+            category: 'Warehouse Operations',
+            title: 'Warehouse Barcode & Pallet Traceability',
+
+            summary: `
+                A Laravel-based warehouse system that traces products
+                and pallets through receiving, freezer storage, internal
+                transfers and dispatch.
+            `,
+
+            tags: [
+                'Laravel',
+                'MySQL',
+                'GS1-128',
+                'Honeywell',
+                'Warehouse Operations'
+            ],
+
+            challenge: `
+                Warehouse staff needed to manage products belonging to
+                multiple customers while preventing duplicate scans,
+                incorrect pallet assignments and inaccurate stock records.
+                Each customer could also have different rules governing
+                product and pallet movement.
+            `,
+
+            solution: `
+                I developed a centralised barcode and pallet-management
+                workflow that validates scanned products, identifies
+                existing pallet relationships and applies configurable
+                customer-specific transfer rules.
+            `,
+
+            features: [
+                'Product and pallet receiving workflows',
+                'GS1 barcode parsing and validation',
+                'Duplicate barcode detection',
+                'Customer-specific pallet-transfer rules',
+                'Freezer location and stock tracking',
+                'Stock-on-hand Excel reports',
+                'Goods-stored reporting',
+                'Scheduled customer email reports'
+            ],
+
+            responsibilities: [
+                'Laravel backend development',
+                'MySQL database design and troubleshooting',
+                'Barcode parsing and validation logic',
+                'JavaScript scanning workflows',
+                'Excel and PDF report generation',
+                'SMTP and scheduled-report configuration',
+                'Linux and Nginx deployment',
+                'Production support for warehouse users'
+            ],
+
+            outcome: `
+                The system provides warehouse staff with one traceable
+                workflow for receiving, storing, transferring and
+                dispatching customer products while giving management
+                access to current operational reports.
+            `
+        },
+
+        'production-barcode': {
+            category: 'Production Traceability',
+            title: 'Production Barcode, Labelling & Traceability',
+
+            summary: `
+                A production system that scans 1D and GS1-128 2D
+                barcodes, validates product data, generates shipping
+                labels and stores production records for traceability.
+            `,
+
+            tags: [
+                'Laravel',
+                'Ishida',
+                '1D / 2D',
+                'GS1-128',
+                'Label Printing',
+                'MySQL'
+            ],
+
+            challenge: `
+                Production and dispatch teams needed to process different
+                barcode formats, consistently generate shipping labels
+                and retain the scanned information for future product
+                investigations and traceability.
+            `,
+
+            solution: `
+                I built a barcode-processing workflow that identifies the
+                scanned format, extracts the available product information,
+                validates it against production rules, saves the record and
+                produces a correctly formatted shipping label.
+            `,
+
+            features: [
+                'Standard 1D barcode scanning',
+                'GS1-128 2D barcode scanning',
+                'GTIN extraction and validation',
+                'Weight extraction from GS1 data',
+                'Best-before date extraction',
+                'Product-rule validation',
+                'Shipping-label generation',
+                'Production-history reporting'
+            ],
+
+            responsibilities: [
+                'Barcode parsing implementation',
+                'Laravel application development',
+                'Ishida workflow integration',
+                'Honeywell scanner testing',
+                'Industrial label-printer integration',
+                'Custom label-size configuration',
+                'Database storage and traceability',
+                'Linux CUPS printing configuration'
+            ],
+
+            outcome: `
+                Production barcode information is captured consistently,
+                shipping labels are generated from validated data and
+                historical records remain available for operational
+                reporting and product traceability.
+            `
+        },
+
+        operations: {
+            category: 'Business Operations',
+            title: 'Plant & Farm Operations Platform',
+
+            summary: `
+                A collection of production systems supporting orders,
+                inventory, invoicing, farm records, operational reporting
+                and business-rule automation.
+            `,
+
+            tags: [
+                'PHP',
+                'Laravel',
+                'MariaDB',
+                'Reporting',
+                'Automation',
+                'Linux'
+            ],
+
+            challenge: `
+                Plant and farm teams required systems capable of supporting
+                specialised operational rules that could not be handled
+                effectively through generic off-the-shelf software.
+            `,
+
+            solution: `
+                I developed and maintained interconnected business
+                applications covering production, sales, stock,
+                livestock records and management reporting while
+                progressively improving legacy functionality.
+            `,
+
+            features: [
+                'Order and invoice processing',
+                'Stock and location management',
+                'Production reporting',
+                'Mortality and livestock records',
+                'Bird-weight analysis',
+                'Harvest documentation',
+                'Excel and PDF exports',
+                'Automated operational alerts'
+            ],
+
+            responsibilities: [
+                'PHP and Laravel development',
+                'Legacy-code maintenance',
+                'Business-rule implementation',
+                'Database query optimisation',
+                'Report design and generation',
+                'Scheduled email automation',
+                'User support and troubleshooting',
+                'Linux server administration'
+            ],
+
+            outcome: `
+                The platforms provide operations, finance and management
+                teams with systems tailored to their actual workflows,
+                reducing reliance on disconnected manual processes.
+            `
+        },
+
+        'workforce-api': {
+            category: 'API Integration',
+            title: 'Workforce Event API Integration',
+
+            summary: `
+                A Laravel REST API integration connecting production-floor
+                attendance devices with internal workforce systems.
+            `,
+
+            tags: [
+                'Laravel',
+                'REST API',
+                'Webhooks',
+                'JSON',
+                'Cloudflare',
+                'Nginx'
+            ],
+
+            challenge: `
+                Workforce clocking events from production-floor devices
+                needed to be received reliably and made available to
+                internal systems without exposing the application server
+                directly to the public internet.
+            `,
+
+            solution: `
+                I created a Laravel API that receives event notifications,
+                validates and logs the payloads, provides employee lookup
+                endpoints and operates through a secured Cloudflare
+                connection.
+            `,
+
+            features: [
+                'Event-notification webhook',
+                'Clock-in and clock-out events',
+                'Break event processing',
+                'Employee-list endpoint',
+                'Individual employee lookup',
+                'JSON request logging',
+                'Public API routing',
+                'Cloudflare-secured connectivity'
+            ],
+
+            responsibilities: [
+                'REST endpoint development',
+                'Webhook payload handling',
+                'API testing and validation',
+                'Laravel logging configuration',
+                'Nginx and PHP-FPM configuration',
+                'Cloudflare Tunnel deployment',
+                'Production-device testing',
+                'Integration troubleshooting'
+            ],
+
+            outcome: `
+                Attendance events can be received and investigated
+                centrally, providing the foundation for connecting
+                production-floor activity with internal workforce
+                reporting.
+            `
+        }
+    };
+
+    const modal = document.getElementById('caseStudyModal');
+    const closeButton = modal.querySelector('.case-study-close');
+    const triggers = document.querySelectorAll('.case-study-trigger');
+
+    const categoryElement =
+        document.getElementById('caseStudyCategory');
+
+    const titleElement =
+        document.getElementById('caseStudyTitle');
+
+    const summaryElement =
+        document.getElementById('caseStudySummary');
+
+    const tagsElement =
+        document.getElementById('caseStudyTags');
+
+    const challengeElement =
+        document.getElementById('caseStudyChallenge');
+
+    const solutionElement =
+        document.getElementById('caseStudySolution');
+
+    const featuresElement =
+        document.getElementById('caseStudyFeatures');
+
+    const responsibilitiesElement =
+        document.getElementById('caseStudyResponsibilities');
+
+    const outcomeElement =
+        document.getElementById('caseStudyOutcome');
+
+    let activeTrigger = null;
+
+    function createTag(tag) {
+        const element = document.createElement('span');
+        element.className = 'tag';
+        element.textContent = tag;
+
+        return element;
+    }
+
+    function createListItem(content) {
+        const element = document.createElement('li');
+        element.textContent = content;
+
+        return element;
+    }
+
+    function openCaseStudy(caseStudyKey, trigger) {
+        const caseStudy = caseStudies[caseStudyKey];
+
+        if (!caseStudy) {
+            return;
+        }
+
+        activeTrigger = trigger;
+
+        categoryElement.textContent = caseStudy.category;
+        titleElement.textContent = caseStudy.title;
+        summaryElement.textContent = caseStudy.summary.trim();
+        challengeElement.textContent = caseStudy.challenge.trim();
+        solutionElement.textContent = caseStudy.solution.trim();
+        outcomeElement.textContent = caseStudy.outcome.trim();
+
+        tagsElement.replaceChildren(
+            ...caseStudy.tags.map(createTag)
+        );
+
+        featuresElement.replaceChildren(
+            ...caseStudy.features.map(createListItem)
+        );
+
+        responsibilitiesElement.replaceChildren(
+            ...caseStudy.responsibilities.map(createListItem)
+        );
+
+        document.body.classList.add('modal-open');
+        modal.showModal();
+    }
+
+    function closeCaseStudy() {
+        modal.close();
+    }
+
+    triggers.forEach(function (trigger) {
+        trigger.addEventListener('click', function () {
+            openCaseStudy(
+                trigger.dataset.caseStudy,
+                trigger
+            );
+        });
+    });
+
+    closeButton.addEventListener('click', closeCaseStudy);
+
+    modal.addEventListener('click', function (event) {
+        if (event.target === modal) {
+            closeCaseStudy();
+        }
+    });
+
+    modal.addEventListener('close', function () {
+        document.body.classList.remove('modal-open');
+
+        if (activeTrigger) {
+            activeTrigger.focus();
+        }
+    });
+});
+</script>
   </body>
 </html>
