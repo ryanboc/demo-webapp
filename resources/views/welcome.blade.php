@@ -22,6 +22,28 @@
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:image" content="{{ asset('img/portfolio-preview.jpg') }}">
 
+    <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
+
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="{{ asset('img/favicon-32x32.png') }}"
+        >
+
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="192x192"
+            href="{{ asset('img/favicon-192x192.png') }}"
+        >
+
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="{{ asset('img/apple-touch-icon.png') }}"
+        >
+
     <meta name="twitter:card" content="summary_large_image">
 
     
