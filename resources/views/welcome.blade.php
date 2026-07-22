@@ -955,6 +955,96 @@ body.modal-open {
             </div>
         </section>
 
+{{-- Add this section here --}}
+<section id="demos" class="section" style="background: var(--bg-alt);">
+    <div class="container">
+        <div class="section-header">
+            <div>
+                <h2>Technical Demos</h2>
+
+                <p style="margin-bottom: 0;">
+                    Smaller applications demonstrating Laravel fundamentals,
+                    API integration, validation and database operations.
+                </p>
+            </div>
+
+            <a
+                href="{{ config('portfolio.github') }}"
+                class="btn btn-outline btn-sm"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                View GitHub
+                <i class="fas fa-arrow-up-right-from-square"></i>
+            </a>
+        </div>
+
+        <div class="grid-2">
+            {{-- Edamam API --}}
+            <article class="card">
+                <div class="terminal-thumb">
+                    <i class="fas fa-utensils"></i>
+                    <span class="text-mono">demo/nutrition-api</span>
+                </div>
+
+                <div class="card-body">
+                    <h3>Nutrition API Integration</h3>
+
+                    <p>
+                        A Laravel application that retrieves nutrition information
+                        from the Edamam API, processes the response and presents
+                        ingredient and daily-value information.
+                    </p>
+
+                    <div class="tags">
+                        <span class="tag">Laravel</span>
+                        <span class="tag">REST API</span>
+                        <span class="tag">Edamam</span>
+                        <span class="tag">JSON</span>
+                        <span class="tag">Caching</span>
+                    </div>
+
+                    <a class="case-study-link" href="{{ url('/test-nutrition') }}">
+                        Open Demo
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+
+            {{-- CRUD Demo --}}
+            <article class="card">
+                <div class="terminal-thumb">
+                    <i class="fas fa-list-check"></i>
+                    <span class="text-mono">demo/task-manager</span>
+                </div>
+
+                <div class="card-body">
+                    <h3>Laravel Task Manager</h3>
+
+                    <p>
+                        A database-backed task manager demonstrating create,
+                        read, update and delete operations with validation,
+                        Eloquent models and Laravel routing.
+                    </p>
+
+                    <div class="tags">
+                        <span class="tag">Laravel</span>
+                        <span class="tag">CRUD</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">Eloquent</span>
+                        <span class="tag">Validation</span>
+                    </div>
+
+                    <a class="case-study-link" href="{{ url('/todos') }}">
+                        Open Demo
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
         <dialog id="caseStudyModal" class="case-study-modal" aria-labelledby="caseStudyTitle" aria-describedby="caseStudySummary">
         <div class="case-study-modal-container">
             <header class="case-study-modal-header">
