@@ -14,38 +14,37 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-      :root {
-        /* Color Palette (Slate / Server Blue) */
-        --bg: #ffffff;
-        --bg-alt: #f8fafc;
+      :root,
+      html[data-theme="light"] {
+        color-scheme: light;
+        --font-main: "Inter", system-ui, sans-serif;
+        --font-mono: "JetBrains Mono", monospace;
+        --container: 1200px;
+        --radius: 14px;
+        --space-lg: 88px;
+        --space-xl: 104px;
+        --bg: #f8fafc;
+        --bg-alt: #f1f5f9;
         --bg-card: #ffffff;
-        --fg: #0f172a;      /* Dark Slate */
-        --muted: #475569;   /* Medium Slate */
-        --muted-2: #94a3b8; /* Light Slate */
-        --border: #e2e8f0;
-        
-        --brand: #2563eb;   /* Royal Blue */
+        --fg: #0f172a;
+        --muted: #475569;
+        --muted-2: #64748b;
+        --border: #dbe3ee;
+        --brand: #2563eb;
         --brand-hover: #1d4ed8;
-        --accent: #38bdf8;  /* Cyan for subtle details */
-
-        --radius: 12px;
-        --container: 1100px;
-
-        --font-main: 'Inter', system-ui, sans-serif;
-        --font-mono: 'JetBrains Mono', monospace;
-        
-        --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
-        --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-        --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
-
-        --space-xs: 8px;
-        --space-sm: 16px;
-        --space-md: 32px;
-        --space-lg: 64px;
-        --space-xl: 96px;
+        --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.08);
+        --shadow-md: 0 14px 30px rgba(15, 23, 42, 0.12);
+        --shadow-lg: 0 24px 60px rgba(15, 23, 42, 0.14);
+        --modal-background: #ffffff;
+        --modal-panel: #f6f8fb;
+        --modal-text: #172033;
+        --modal-muted: #526072;
+        --modal-border: #dce2ea;
+        --modal-backdrop: rgba(15, 23, 42, 0.55);
       }
 
-      [data-theme="dark"] {
+      html[data-theme="dark"] {
+        color-scheme: dark;
         --bg: #0f172a;
         --bg-alt: #1e293b;
         --bg-card: #1e293b;
@@ -55,6 +54,15 @@
         --border: #334155;
         --brand: #3b82f6;
         --brand-hover: #60a5fa;
+        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.18);
+        --shadow-md: 0 14px 30px rgba(0, 0, 0, 0.25);
+        --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.32);
+        --modal-background: #172235;
+        --modal-panel: #111b2c;
+        --modal-text: #f1f5f9;
+        --modal-muted: #b5c0d0;
+        --modal-border: #334155;
+        --modal-backdrop: rgba(3, 10, 24, 0.82);
       }
 
       /* Global Reset */
@@ -108,13 +116,13 @@
       .btn-sm { padding: 8px 16px; font-size: 0.85rem; }
 
       /* === Header === */
-      header {
+      .site-header {
         position: sticky; top: 0; z-index: 100;
         background: rgba(255, 255, 255, 0.85);
         backdrop-filter: blur(12px);
         border-bottom: 1px solid var(--border);
       }
-      [data-theme="dark"] header { background: rgba(15, 23, 42, 0.85); }
+      [data-theme="dark"] .site-header { background: rgba(15, 23, 42, 0.85); }
       
       .nav-inner { display: flex; justify-content: space-between; align-items: center; height: 70px; }
       .logo { font-weight: 800; font-size: 1.25rem; display: flex; align-items: center; gap: 8px; }
@@ -152,18 +160,20 @@
         padding: 30px; border-radius: var(--radius);
         box-shadow: var(--shadow-lg); text-align: center;
       }
-      .avatar {
+      .profile-image {
         width: 100px; height: 100px; border-radius: 50%;
-        margin: 0 auto 20px; overflow: hidden;
+        display: block; margin: 0 auto 20px; object-fit: cover;
         border: 4px solid var(--bg-alt);
       }
-      .stats-row {
+      .profile-stats {
         display: flex; justify-content: space-around;
         margin-top: 20px; padding-top: 20px;
         border-top: 1px solid var(--border);
+        gap: 16px;
       }
-      .stat h4 { font-size: 1.2rem; margin-bottom: 0; color: var(--fg); }
-      .stat span { font-size: 0.75rem; text-transform: uppercase; color: var(--muted-2); letter-spacing: 1px; font-weight: 600; }
+      .profile-stat { flex: 1; }
+      .profile-stat strong { display: block; font-size: 1.1rem; color: var(--fg); }
+      .profile-stat span { display: block; font-size: 0.72rem; text-transform: uppercase; color: var(--muted-2); letter-spacing: 0.08em; font-weight: 600; }
 
       /* === Projects (Grid) === */
       .section { padding: var(--space-lg) 0; }
@@ -271,7 +281,7 @@
     gap: 24px;
     }
 
-    .grid-3 > a {
+    .grid-3 > .case-study-trigger {
         display: block;
         min-width: 0;
         color: inherit;
@@ -301,7 +311,7 @@
         align-items: center;
         gap: 8px;
         margin-top: 18px;
-        color: var(--primary);
+        color: var(--brand);
         font-size: 0.9rem;
         font-weight: 700;
     }
@@ -311,7 +321,7 @@
         transition: transform 0.2s ease;
     }
 
-    .grid-3 > a:hover .case-study-link i {
+    .case-study-trigger:hover .case-study-link i {
         transform: translateX(4px);
     }
 
@@ -345,7 +355,7 @@
 
 .case-study-trigger:focus-visible {
     border-radius: 14px;
-    outline: 3px solid var(--primary);
+    outline: 3px solid var(--brand);
     outline-offset: 4px;
 }
 
@@ -356,46 +366,53 @@
     max-height: calc(100vh - 40px);
     margin: auto;
     padding: 0;
-    border: 1px solid var(--border);
+    border: 1px solid var(--modal-border);
     border-radius: 18px;
-    background: var(--surface);
-    color: var(--text);
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+    background: var(--modal-background);
+    color: var(--modal-text);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
     overflow: hidden;
+    z-index: 1000;
+}
+
+.case-study-modal[open] {
+    animation: modal-in 0.2s ease-out;
 }
 
 .case-study-modal::backdrop {
-    background: rgba(3, 10, 24, 0.82);
+    background: var(--modal-backdrop);
     backdrop-filter: blur(6px);
 }
 
 .case-study-modal-container {
     max-height: calc(100vh - 40px);
     overflow-y: auto;
+    overscroll-behavior: contain;
 }
 
 .case-study-modal-header {
     position: sticky;
     top: 0;
-    z-index: 5;
+    z-index: 2;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     gap: 24px;
     padding: 28px 32px;
-    border-bottom: 1px solid var(--border);
-    background: var(--surface);
+    background: var(--modal-background);
+    border-bottom: 1px solid var(--modal-border);
 }
 
 .case-study-modal-header h2 {
     margin: 8px 0 0;
     font-size: clamp(1.6rem, 4vw, 2.3rem);
     line-height: 1.2;
+    color: var(--modal-text);
 }
 
 .case-study-category {
-    color: var(--primary);
-    font-family: monospace;
+    color: var(--brand);
+    font-family: var(--font-mono);
     font-size: 0.8rem;
     font-weight: 700;
     letter-spacing: 0.08em;
@@ -404,21 +421,27 @@
 
 .case-study-close {
     display: grid;
-    flex-shrink: 0;
     width: 42px;
     height: 42px;
-    padding: 0;
-    border: 1px solid var(--border);
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid var(--modal-border);
     border-radius: 10px;
     background: transparent;
-    color: var(--text);
+    color: var(--modal-text);
     cursor: pointer;
-    place-items: center;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
 }
 
 .case-study-close:hover {
-    border-color: var(--primary);
-    color: var(--primary);
+    border-color: var(--brand);
+    background: var(--modal-panel);
+    color: var(--brand);
+}
+
+.case-study-close:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--brand) 35%, transparent);
+    outline-offset: 2px;
 }
 
 .case-study-modal-body {
@@ -428,7 +451,7 @@
 .case-study-summary {
     max-width: 800px;
     margin: 0;
-    color: var(--muted);
+    color: var(--modal-muted);
     font-size: 1.05rem;
     line-height: 1.75;
 }
@@ -441,19 +464,23 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 20px;
+    margin-bottom: 20px;
+}
+
+.case-study-modal-body > .case-study-content-section + .case-study-content-section {
+    margin-top: 20px;
 }
 
 .case-study-content-section {
-    margin-bottom: 20px;
     padding: 24px;
-    border: 1px solid var(--border);
     border-radius: 14px;
-    background: var(--surface-2);
+    background: var(--modal-panel);
+    border: 1px solid var(--modal-border);
 }
 
 .case-study-content-section p {
     margin: 0;
-    color: var(--muted);
+    color: var(--modal-muted);
     line-height: 1.7;
 }
 
@@ -465,12 +492,13 @@
 }
 
 .case-study-section-heading i {
-    color: var(--primary);
+    color: var(--brand);
 }
 
 .case-study-section-heading h3 {
     margin: 0;
     font-size: 1rem;
+    color: var(--modal-text);
 }
 
 .case-study-feature-list {
@@ -485,7 +513,7 @@
 .case-study-feature-list li {
     position: relative;
     padding-left: 24px;
-    color: var(--muted);
+    color: var(--modal-muted);
     line-height: 1.55;
 }
 
@@ -493,18 +521,30 @@
     position: absolute;
     top: 0;
     left: 0;
-    color: var(--primary);
+    color: var(--brand);
     content: "✓";
     font-weight: 700;
 }
 
 .case-study-outcome {
-    border-color: color-mix(in srgb, var(--primary) 40%, var(--border));
+    margin-top: 20px;
+    border-color: color-mix(in srgb, var(--brand) 40%, var(--modal-border));
 }
+
+.case-study-note {
+    margin-top: 20px;
+    padding: 16px 18px;
+    border: 1px solid var(--modal-border);
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--brand) 7%, var(--modal-background));
+}
+
+.case-study-note p { margin: 0; color: var(--modal-muted); font-size: 0.9rem; }
+.case-study-note i { margin-right: 8px; color: var(--brand); }
 
 .case-study-confidentiality {
     margin: 12px 0 0;
-    color: var(--muted-2);
+    color: var(--modal-muted);
     font-size: 0.8rem;
     line-height: 1.6;
     text-align: center;
@@ -516,6 +556,16 @@
 
 body.modal-open {
     overflow: hidden;
+}
+
+@keyframes modal-in {
+    from { opacity: 0; transform: translateY(14px) scale(0.985); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 }
 
 @media (max-width: 700px) {
@@ -542,7 +592,7 @@ body.modal-open {
       </head>
 
       <body>
-        <header>
+        <header class="site-header">
           <div class="container nav-inner">
             <a href="#top" class="logo">
               <i class="fas fa-server text-brand"></i> {{ config('portfolio.name', 'Portfolio') }}
@@ -556,7 +606,7 @@ body.modal-open {
             </nav>
 
             <div style="display: flex; gap: 10px;">
-              <button class="btn btn-outline btn-sm" id="themeBtn" aria-label="Toggle theme">
+              <button type="button" class="btn btn-outline btn-sm" id="themeBtn" aria-label="Switch to dark theme" aria-pressed="false">
                 <i class="fas fa-moon"></i>
               </button>
               <a class="btn btn-primary btn-sm" href="#contact">Hire Me</a>
@@ -697,6 +747,7 @@ body.modal-open {
                             type="button"
                             class="case-study-trigger"
                             data-case-study="production-barcode"
+                            aria-haspopup="dialog"
                         >
                         <article class="card">
                             <div class="terminal-thumb">
@@ -711,8 +762,8 @@ body.modal-open {
                                 <h3>Production Barcode, Labelling & Traceability</h3>
 
                                 <p>
-                                    A production barcode system that scans 1D and GS1-128
-                                    2D barcodes, validates product information, generates
+                                    A production barcode system that scans 1D and 2D GS1
+                                    barcodes, validates product information, generates
                                     shipping labels and stores production records for
                                     end-to-end traceability.
                                 </p>
@@ -720,7 +771,7 @@ body.modal-open {
                                 <div class="tags">
                                     <span class="tag">Laravel</span>
                                     <span class="tag">1D / 2D</span>
-                                    <span class="tag">GS1-128</span>
+                                    <span class="tag">GS1</span>
                                     <span class="tag">Ishida</span>
                                     <span class="tag">Label Printing</span>
                                 </div>
@@ -738,6 +789,7 @@ body.modal-open {
                           type="button"
                           class="case-study-trigger"
                           data-case-study="warehouse"
+                          aria-haspopup="dialog"
                       >
                         <article class="card">
                             <div class="terminal-thumb">
@@ -778,6 +830,7 @@ body.modal-open {
                           type="button"
                           class="case-study-trigger"
                           data-case-study="operations"
+                          aria-haspopup="dialog"
                       >
                         <article class="card">
                             <div class="terminal-thumb">
@@ -817,6 +870,7 @@ body.modal-open {
                   type="button"
                   class="case-study-trigger"
                   data-case-study="workforce-api"
+                  aria-haspopup="dialog"
               >
                   <article class="card">
                       <div class="terminal-thumb">
@@ -862,7 +916,7 @@ body.modal-open {
             </div>
         </section>
 
-        <dialog id="caseStudyModal" class="case-study-modal">
+        <dialog id="caseStudyModal" class="case-study-modal" aria-labelledby="caseStudyTitle" aria-describedby="caseStudySummary">
         <div class="case-study-modal-container">
             <header class="case-study-modal-header">
                 <div>
@@ -966,7 +1020,7 @@ body.modal-open {
                 </ul>
               </div>
               <div class="service-item">
-                <i class="fas fa-linux fa-2x text-brand mb-3"></i>
+                <i class="fab fa-linux fa-2x text-brand mb-3"></i>
                 <h3>Linux Administration</h3>
                 <ul>
                   <li><i class="fas fa-check"></i> VPS Provisioning (Ubuntu)</li>
@@ -1009,7 +1063,7 @@ body.modal-open {
                 <p class="mb-2"><strong>Email Me:</strong></p>
                 <div style="display: flex; gap: 10px;">
                   <input type="text" value="{{ config('portfolio.email') }}" readonly id="emailInput" style="margin:0; width: auto; flex:1;">
-                  <button class="btn btn-primary" id="copyEmailBtn">Copy</button>
+                  <button type="button" class="btn btn-primary" id="copyEmailBtn">Copy</button>
                 </div>
               </div>
               
@@ -1068,6 +1122,8 @@ body.modal-open {
           document.documentElement.setAttribute('data-theme', theme);
           localStorage.setItem('theme', theme);
           themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+          themeBtn.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+          themeBtn.setAttribute('aria-label', theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme');
         }
         
         // Check saved or preference
@@ -1094,8 +1150,14 @@ body.modal-open {
         }
 
         // --- Copy Email ---
-        document.getElementById('copyEmailBtn').addEventListener('click', () => {
-          navigator.clipboard.writeText(EMAIL).then(() => showToast('Email copied to clipboard!'));
+        document.getElementById('copyEmailBtn').addEventListener('click', async () => {
+          try {
+            await navigator.clipboard.writeText(EMAIL);
+            showToast('Email copied to clipboard!');
+          } catch (error) {
+            document.getElementById('emailInput').select();
+            showToast('Select the email address and copy it manually.');
+          }
         });
 
         // --- Form Handler (Mailto Fallback) ---
@@ -1215,7 +1277,7 @@ document.addEventListener('DOMContentLoaded', function () {
             title: 'Production Barcode, Labelling & Traceability',
 
             summary: `
-                A production system that scans 1D and GS1-128 2D
+                A production system that scans 1D and 2D GS1
                 barcodes, validates product data, generates shipping
                 labels and stores production records for traceability.
             `,
@@ -1224,7 +1286,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 'Laravel',
                 'Ishida',
                 '1D / 2D',
-                'GS1-128',
+                'GS1',
                 'Label Printing',
                 'MySQL'
             ],
@@ -1245,7 +1307,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             features: [
                 'Standard 1D barcode scanning',
-                'GS1-128 2D barcode scanning',
+                'GS1 2D barcode scanning',
                 'GTIN extraction and validation',
                 'Weight extraction from GS1 data',
                 'Best-before date extraction',
