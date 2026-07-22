@@ -13,6 +13,19 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <link rel="canonical" href="{{ url()->current() }}">
+    <link rel="icon" href="{{ asset('favicon.ico') }}">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Ryan Boc — Laravel Developer & Linux Systems Administrator">
+    <meta property="og:description" content="Production Laravel systems, barcode traceability, APIs, reporting and Linux infrastructure.">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="{{ asset('img/portfolio-preview.jpg') }}">
+
+    <meta name="twitter:card" content="summary_large_image">
+
+    
+
     <style>
       :root,
       html[data-theme="light"] {
@@ -748,6 +761,7 @@ body.modal-open {
                             class="case-study-trigger"
                             data-case-study="production-barcode"
                             aria-haspopup="dialog"
+                            aria-label="Open Production Barcode, Labelling & Traceability case study"
                         >
                         <article class="card">
                             <div class="terminal-thumb">
@@ -790,6 +804,7 @@ body.modal-open {
                           class="case-study-trigger"
                           data-case-study="warehouse"
                           aria-haspopup="dialog"
+                          aria-label="Open Warehouse Barcode and Pallet Traceability case study"
                       >
                         <article class="card">
                             <div class="terminal-thumb">
@@ -831,6 +846,7 @@ body.modal-open {
                           class="case-study-trigger"
                           data-case-study="operations"
                           aria-haspopup="dialog"
+                          aria-label="Open Plant & Farm Operations case study"
                       >
                         <article class="card">
                             <div class="terminal-thumb">
@@ -871,6 +887,7 @@ body.modal-open {
                   class="case-study-trigger"
                   data-case-study="workforce-api"
                   aria-haspopup="dialog"
+                  aria-label="Open Workforce Event API Integration case study"
               >
                   <article class="card">
                       <div class="terminal-thumb">
@@ -1025,7 +1042,7 @@ body.modal-open {
                 <ul>
                   <li><i class="fas fa-check"></i> VPS Provisioning (Ubuntu)</li>
                   <li><i class="fas fa-check"></i> Nginx & Apache Config</li>
-                  <li><i class="fas fa-check"></i> DNS Management</li>
+                  <li><i class="fas fa-check"></i> BIND9 DNS</li>
                   <li><i class="fas fa-check"></i> Security Hardening (UFW)</li>
                 </ul>
               </div>
@@ -1077,16 +1094,29 @@ body.modal-open {
             <form id="contactForm">
               <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                 <div>
-                  <label>Name</label>
-                  <input type="text" name="name" required placeholder="John Doe">
+                  <label for="contact-name">Name</label>
+                    <input
+                        id="contact-name"
+                        type="text"
+                        name="name"
+                        autocomplete="name"
+                        placeholder="John Doe"
+                        required
+                    >
                 </div>
                 <div>
-                  <label>Email</label>
-                  <input type="email" name="email" required placeholder="john@company.com">
+                  <label for="contact-email">Email</label>
+                  <input
+                      id="contact-email"
+                      type="email"
+                      name="email"
+                      required
+                      placeholder="john@company.com"
+                  >
                 </div>
               </div>
-              <label>Project Details</label>
-              <textarea name="message" rows="5" required placeholder="I need help with..."></textarea>
+              <label for="contact-message">Project Details</label>
+              <textarea id="contact-message" name="message" rows="5" required placeholder="I need help with..."></textarea>
               <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
             </form>
           </div>
