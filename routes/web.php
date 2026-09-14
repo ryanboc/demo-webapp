@@ -9,7 +9,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TodoController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('ryanboc');
 });
 
 Route::get('/dashboard', function () {
