@@ -169,11 +169,34 @@
       @media (max-width: 768px) { .nav-links { display: none; } }
 
       /* === Hero Section (Dot Pattern) === */
+      @keyframes hero-aurora {
+        0%, 100% { background-position: 50% 0%, 0 0; }
+        50% { background-position: 58% 42px, 12px 18px; }
+      }
+
+      @keyframes ambient-flow {
+        0%, 100% { background-position: 0 0, 50% 0; }
+        50% { background-position: 30px 36px, 38% 100%; }
+      }
+
+      @keyframes profile-sheen {
+        0%, 18% { background-position: 180% 0; }
+        62%, 100% { background-position: -80% 0; }
+      }
+
+      @keyframes accent-sweep {
+        0%, 100% { transform: scaleX(0.58); opacity: 0.55; }
+        50% { transform: scaleX(1); opacity: 1; }
+      }
+
       .hero {
         padding: var(--space-xl) 0;
-        background-image: radial-gradient(var(--muted-2) 1px, transparent 1px);
-        background-size: 30px 30px; /* Dot grid */
-        background-position: 0 var(--hero-parallax-offset, 0px);
+        background-image:
+          radial-gradient(ellipse at 78% 24%, color-mix(in srgb, var(--brand) 13%, transparent), transparent 42%),
+          radial-gradient(var(--muted-2) 1px, transparent 1px);
+        background-size: 145% 150%, 30px 30px;
+        background-position: 50% 0, 0 0;
+        animation: hero-aurora 9s ease-in-out infinite;
         opacity: 0.9;
         border-bottom: 1px solid var(--border);
         will-change: background-position;
@@ -192,12 +215,27 @@
 
       /* Profile Card */
       .profile-card {
+        position: relative;
+        isolation: isolate;
         background: var(--bg-card); border: 1px solid var(--border);
         padding: 30px; border-radius: var(--radius);
-        box-shadow: var(--shadow-lg); text-align: center;
-        transform: translate3d(0, var(--profile-parallax-offset, 0px), 0);
-        will-change: transform;
+        box-shadow: var(--shadow-lg), 0 0 28px color-mix(in srgb, var(--brand) 18%, transparent);
+        text-align: center;
       }
+      .profile-card::after {
+        position: absolute;
+        inset: -2px;
+        border-radius: inherit;
+        content: "";
+        pointer-events: none;
+      }
+      .profile-card::after {
+        z-index: 0;
+        background: linear-gradient(112deg, transparent 34%, color-mix(in srgb, white 32%, transparent) 48%, transparent 62%);
+        background-size: 240% 100%;
+        animation: profile-sheen 7s ease-in-out infinite;
+      }
+      .profile-card > * { position: relative; z-index: 1; }
       .profile-image {
         width: 100px; height: 100px; border-radius: 50%;
         display: block; margin: 0 auto 20px; object-fit: cover;
@@ -228,21 +266,44 @@
         z-index: 0;
         content: "";
         pointer-events: none;
-        opacity: 0.55;
+        opacity: 0.78;
         background-image:
           radial-gradient(circle, color-mix(in srgb, var(--brand) 38%, transparent) 1px, transparent 1.5px),
-          radial-gradient(circle at 78% 52%, color-mix(in srgb, var(--brand) 16%, transparent) 0, transparent 42%);
+          radial-gradient(circle at 78% 52%, color-mix(in srgb, var(--brand) 28%, transparent) 0, transparent 42%);
         background-repeat: repeat, no-repeat;
         background-size: 34px 34px, 145% 145%;
-        background-position:
-          0 var(--section-parallax-background-offset, 0px),
-          50% var(--section-parallax-glow-offset, 0px);
-        will-change: background-position;
+        background-position: 0 0, 50% 0;
+        animation: ambient-flow 10s ease-in-out infinite;
       }
+      main > section:nth-of-type(3n + 1)::before { animation-delay: -7s; }
+      main > section:nth-of-type(3n + 2)::before { animation-delay: -15s; }
       main > section:not(.hero) > *,
       footer > * { position: relative; z-index: 1; }
-      
+      html.reveal-ready [data-reveal] {
+        opacity: 0;
+        transition: opacity 800ms ease, transform 800ms cubic-bezier(0.2, 0.75, 0.25, 1);
+        transition-delay: var(--reveal-delay, 0ms);
+        will-change: opacity, transform;
+      }
+      html.reveal-ready [data-reveal="left"] { transform: translate3d(-64px, 0, 0); }
+      html.reveal-ready [data-reveal="right"] { transform: translate3d(64px, 0, 0); }
+      html.reveal-ready [data-reveal="up"] { transform: translate3d(0, 42px, 0); }
+      html.reveal-ready [data-reveal].is-revealed { opacity: 1; transform: translate3d(0, 0, 0); }
       .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; }
+      .section-header h2::after,
+      #services h2::after,
+      #stack h2::after,
+      #contact h2::after {
+        display: block;
+        width: 54px;
+        height: 3px;
+        margin-top: 12px;
+        border-radius: 99px;
+        content: "";
+        background: linear-gradient(90deg, var(--brand), #38bdf8, #a78bfa);
+        transform-origin: left center;
+        animation: accent-sweep 3.6s ease-in-out infinite;
+      }
       
       .grid-4 {
         display: grid;
@@ -293,6 +354,13 @@
 
       /* === Services (Split) === */
       .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+      .service-item {
+        position: relative;
+        padding: 20px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: color-mix(in srgb, var(--bg-card) 72%, transparent);
+      }
       .service-item ul { margin-top: 16px; }
       .service-item li { margin-bottom: 10px; display: flex; align-items: center; gap: 10px; color: var(--muted); }
       .service-item li i { color: var(--brand); font-size: 0.8rem; }
@@ -315,21 +383,6 @@
       }
       .stack-pill i { color: var(--muted); }
       .stack-pill:hover { transform: translateY(-3px); border-color: var(--brand); box-shadow: var(--shadow-sm); }
-
-      .stack-container.is-visible .stack-pill { animation: stack-pill-in 0.45s both cubic-bezier(0.2, 0.8, 0.2, 1); }
-      .stack-container.is-visible .stack-pill:nth-child(2) { animation-delay: 0.04s; }
-      .stack-container.is-visible .stack-pill:nth-child(3) { animation-delay: 0.08s; }
-      .stack-container.is-visible .stack-pill:nth-child(4) { animation-delay: 0.12s; }
-      .stack-container.is-visible .stack-pill:nth-child(5) { animation-delay: 0.16s; }
-      .stack-container.is-visible .stack-pill:nth-child(6) { animation-delay: 0.20s; }
-      .stack-container.is-visible .stack-pill:nth-child(7) { animation-delay: 0.24s; }
-      .stack-container.is-visible .stack-pill:nth-child(8) { animation-delay: 0.28s; }
-      .stack-container.is-visible .stack-pill:nth-child(9) { animation-delay: 0.32s; }
-      .stack-container.is-visible .stack-pill:nth-child(10) { animation-delay: 0.36s; }
-      .stack-container.is-visible .stack-pill:nth-child(11) { animation-delay: 0.40s; }
-      .stack-container.is-visible .stack-pill:nth-child(12) { animation-delay: 0.44s; }
-      .stack-container.is-visible .stack-pill:nth-child(13) { animation-delay: 0.48s; }
-      .stack-container.is-visible .stack-pill:nth-child(14) { animation-delay: 0.52s; }
 
       /* === Contact Form === */
       .contact-box {
@@ -651,17 +704,10 @@
         to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    @keyframes stack-pill-in {
-        from { opacity: 0; transform: translateY(12px) scale(0.96); }
-        to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
     @media (prefers-reduced-motion: reduce) {
         html { scroll-behavior: auto; }
-        *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
-        .hero { --hero-parallax-offset: 0px !important; }
-        .profile-card { --profile-parallax-offset: 0px !important; }
-        main > section:not(.hero), footer { --section-parallax-background-offset: 0px !important; --section-parallax-glow-offset: 0px !important; }
+        *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation: none !important; }
+        html.reveal-ready [data-reveal] { opacity: 1; transform: none; transition: none; }
     }
 
     @media (max-width: 700px) {
@@ -1361,70 +1407,50 @@
           setTheme(cur === 'light' ? 'dark' : 'light');
         });
 
-        // Page-wide parallax: sections drift at slightly different speeds as they move through the viewport.
-        const hero = document.querySelector('.hero');
-        const profileCard = document.querySelector('.profile-card');
-        const pageLayers = document.querySelectorAll('main > section:not(.hero), footer');
-        const allowsMotion = window.matchMedia('(prefers-reduced-motion: no-preference)');
-        let parallaxFrame = null;
+        // Scroll reveals: keep content visible without JavaScript or reduced motion.
+        const revealGroups = [
+          ['.hero-grid > div:first-child', 'left'],
+          ['.profile-card', 'right'],
+          ['#projects .section-header', 'up'],
+          ['#projects .case-study-trigger', 'side'],
+          ['#projects .case-study-note', 'up'],
+          ['#demos .section-header', 'up'],
+          ['#demos .grid-2 > .card', 'side'],
+          ['#services .grid-2 > :first-child', 'left'],
+          ['#services .service-list', 'right'],
+          ['#stack > .container > h2', 'up'],
+          ['#stack .stack-pill', 'up'],
+          ['#contact .contact-box', 'up'],
+          ['footer .container', 'up'],
+        ];
+        const revealMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-        function updateParallax() {
-          parallaxFrame = null;
+        if ('IntersectionObserver' in window && !revealMotion.matches) {
+          const revealTargets = [];
 
-          if (!allowsMotion.matches || window.innerWidth < 900) {
-            hero?.style.removeProperty('--hero-parallax-offset');
-            profileCard?.style.removeProperty('--profile-parallax-offset');
-            pageLayers.forEach(layer => {
-              layer.style.removeProperty('--section-parallax-background-offset');
-              layer.style.removeProperty('--section-parallax-glow-offset');
+          revealGroups.forEach(([selector, direction]) => {
+            document.querySelectorAll(selector).forEach((element, index) => {
+              const resolvedDirection = direction === 'side'
+                ? (index % 2 === 0 ? 'left' : 'right')
+                : direction;
+              element.dataset.reveal = resolvedDirection;
+              element.style.setProperty('--reveal-delay', `${Math.min(index * 100, 400)}ms`);
+              revealTargets.push(element);
             });
-            return;
-          }
-
-          if (hero && profileCard) {
-            const heroTop = hero.getBoundingClientRect().top;
-            const heroOffset = Math.max(-80, Math.min(80, -heroTop));
-            hero.style.setProperty('--hero-parallax-offset', `${heroOffset * 0.18}px`);
-            profileCard.style.setProperty('--profile-parallax-offset', `${heroOffset * -0.1}px`);
-          }
-
-          const viewportMiddle = window.innerHeight / 2;
-          pageLayers.forEach(layer => {
-            const bounds = layer.getBoundingClientRect();
-            const layerMiddle = bounds.top + (bounds.height / 2);
-            const offset = Math.max(-96, Math.min(96, (viewportMiddle - layerMiddle) * 0.16));
-            layer.style.setProperty('--section-parallax-background-offset', `${offset}px`);
-            layer.style.setProperty('--section-parallax-glow-offset', `${offset * -0.3}px`);
           });
-        }
 
-        function requestParallaxUpdate() {
-          if (parallaxFrame === null) {
-            parallaxFrame = window.requestAnimationFrame(updateParallax);
-          }
-        }
+          if (revealTargets.length) {
+            document.documentElement.classList.add('reveal-ready');
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('is-revealed');
+                  observer.unobserve(entry.target);
+                }
+              });
+            }, { threshold: 0.14, rootMargin: '0px 0px -7% 0px' });
 
-        requestParallaxUpdate();
-        window.addEventListener('scroll', requestParallaxUpdate, { passive: true });
-        window.addEventListener('resize', requestParallaxUpdate);
-        allowsMotion.addEventListener?.('change', requestParallaxUpdate);
-
-        // Reveal the stack as it enters the viewport, without hiding it when JavaScript is unavailable.
-        const stackContainer = document.querySelector('.stack-container');
-        if (stackContainer) {
-          const revealStack = () => stackContainer.classList.add('is-visible');
-
-          if ('IntersectionObserver' in window) {
-            const stackObserver = new IntersectionObserver((entries, observer) => {
-              if (entries.some(entry => entry.isIntersecting)) {
-                revealStack();
-                observer.disconnect();
-              }
-            }, { threshold: 0.2 });
-
-            stackObserver.observe(stackContainer);
-          } else {
-            revealStack();
+            revealTargets.forEach(element => revealObserver.observe(element));
           }
         }
 
